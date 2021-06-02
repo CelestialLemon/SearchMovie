@@ -10,7 +10,7 @@ const Genres = ({data}) => {
 
                  return(
                      <div>
-                         <h3 className="genre btn btn-outline-secondary" style={{borderRadius: "50px"}}>{genre.name}</h3>
+                         <h3 className="genre btn btn-outline-secondary" style={{borderRadius: "50px"}} key={index}>{genre.name}</h3>
                      </div>
                  )
              })}
