@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom' 
 import '../bootstrap/bootstrap-5.0.1-dist/css/bootstrap.min.css'
 import axios from 'axios'
-import '../App.css'
+import './layout/SeriesInfoPage/SeriesInfoPage.css'
 
-import ShowDetails from './layout/ShowInfoPage/ShowDetails'
-import Genres from './layout/ShowInfoPage/Genres'
+import SeriesDetails from './layout/SeriesInfoPage/SeriesDetails'
+import Genres from './layout/SeriesInfoPage/Genres'
+import Description from './layout/SeriesInfoPage/Description'
+import Title from './layout/SeriesInfoPage/Title'
+import SeasonInfoCard from './layout/SeasonList/SeasonInfoCard'
 
 
 const ShowInfo = () => {
@@ -38,44 +41,61 @@ const ShowInfo = () => {
             console.log(err);
         }
     }
-    useEffect(() =>
-    {
-        FetchData();
-    }, [])     //avoid the cycle of fetching data every time the page is re-rendered
+    
     
 
     let bannerCss;   //css for banner , written external instead of inline to make code look cleaner     
-    
+    let SeasonCards = [];
     if(data)        //after data is fetched css is set to avoid error at data.backdrop
     {
        bannerCss = 
-    {
-        height : "720px",
-        padding: "25px 150px",
-        boxShadow: "0px -16px 43px 21px rgba(0, 0, 0, 0.6)",
-        backgroundSize : "cover",
-        overflow: "hidden",
-        background: "linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(" 
-        + data.backdrop + ") no-repeat center center fixed",
-        boxShadow: "inset 0px 0px 0px 0px black"
-    };
+        {
+            height : "720px",
+            minHeight : "720px",
+            padding: "25px 150px",
+            boxShadow: "0px -16px 43px 21px rgba(0, 0, 0, 0.6)",
+            backgroundSize : "cover",
+            background: "linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(" 
+            + data.backdrop + ") no-repeat center center fixed",
+            boxShadow: "inset 0px 0px 0px 0px black"
+        };
+
+        for(var i=1; i<= data.numOfSeasons; i++)
+        {
+            SeasonCards.push(<SeasonInfoCard id={id} seasonNumber={i} key={i}></SeasonInfoCard>);
+        }
     }
+
+
+    
+    
+
+    useEffect(() =>
+    {
+        FetchData();
+        
+    }, [])     //avoid the cycle of fetching data every time the page is re-rendered
+    
        
     if(data)//renderes page after data is fetched
     return (
-        (<div>
+        (<div style={{backgroundColor: "black"}}>
         <div className="header" style={bannerCss}>
             <img src={data.poster} height="70%" style={{marginTop: "50px"}} alt="a;df"></img>
             <div className="details" style={{marginLeft : "100px", marginTop:"50px"}}>
-             <h3 className="title">{data.title}</h3>
-             <h3 className="description">{data.description}</h3>   
-             <ShowDetails data={data}></ShowDetails>
-             <br></br>
-             <Genres data={data}></Genres>
-             
-             <button className="button red" style={{display:"flex"}}>+ My List</button>
-
+                <Title data={data}></Title>
+                <Description data={data}></Description>
+                <SeriesDetails data={data}></SeriesDetails>
+                <br></br>
+                <Genres data={data}></Genres>
+                <div style={{display:"flex"}}>
+                    <button className="button red">+ Currently Watching</button>
+                    <button className="button goldenrod" >+ Watch Later</button>
+                </div>
             </div>
+        </div>
+        <div>
+            {SeasonCards}
         </div>
         </div>) 
     )

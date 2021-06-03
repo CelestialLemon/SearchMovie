@@ -1,0 +1,51 @@
+.seasonContainer
+{
+    max-width: 1200px;
+    min-height: 300px;
+    margin: 5%;
+    display: flex;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: white;
+    transition : transform 0.2s;
+}
+
+.seasonContainer:hover
+{
+    transform: scale(1.1);
+}
+
+.poster
+{
+    max-height: 300px;
+    border-radius: 10px;
+}
+
+.seasonContainer .details
+{
+   margin-left: 3%;
+   margin-top: 2%;
+}
+
+.seasonContainer .details .title
+{
+    font-size: 40px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   
+      
+}
+
+
+.seasonContainer .overview
+{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    min-height: 50%;
+    padding-right: 2%;
+}
+
+.seasonContainer .details .numofepisodes
+{
+    font-size: 20px;
+    margin-right: 2%;
+}

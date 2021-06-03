@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../../App.css'
 
-const ShowDetails = ({data}) => {
+const SeriesDetails = ({data}) => {
     return (
         <div>
              <h3 className="year">{data.yearOfRelease}</h3>
@@ -15,4 +15,4 @@ const ShowDetails = ({data}) => {
     )
 }
 
-export default ShowDetails
+export default SeriesDetails

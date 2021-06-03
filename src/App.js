@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './App.css';
 import Home from './components/Home'
+import Temp from './components/Temp'
 import ShowInfo from './components/ShowInfo'
 
 
@@ -9,9 +10,10 @@ function App() {
     <div>
       <Router>
         <Switch>
+          <Route exact path="/temp" component={Temp}></Route>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/tv/:id" component={ShowInfo}></Route>
-        </Switch>
+          </Switch>
       </Router>
     </div>
   );

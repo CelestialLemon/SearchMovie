@@ -2,11 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { useHistory} from 'react-router-dom'
-import SearchResult from './SearchResult'
 
 const Home = () => {
     const [searchString, setSearchString] = useState('');
-    const [showResult, setShowResult] = useState(false);
     const [data, setData] = useState(null);
 
     let history = useHistory();
@@ -27,22 +25,13 @@ const Home = () => {
         }
     }
 
-    const onMouseOverEnter = () =>
-    {
-        console.log(true);
-    }
-
-    const onMouseOut = () =>
-    {
-        console.log(false);
-    }
-
+    
     return (
         <div>
             <label>Search for the tv show you want </label>
             <input type="text" onChange = {(e) => setSearchString(e.target.value)}></input>
-            <button onClick={onSearchClick} onMouseEnter={onMouseOverEnter} onMouseLeave={onMouseOut}>Search</button>
-            {showResult ? <SearchResult result={data}></SearchResult> : <></>}
+            <button onClick={onSearchClick}>Search</button>
+            
         </div>
     )
 }

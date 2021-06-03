@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../App.css'
+import './SeriesInfoPage.css'
 
 const Genres = ({data}) => {
     return (
