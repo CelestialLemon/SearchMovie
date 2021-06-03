@@ -11,6 +11,7 @@ import Genres from './layout/SeriesInfoPage/Genres'
 import Description from './layout/SeriesInfoPage/Description'
 import Title from './layout/SeriesInfoPage/Title'
 import SeasonInfoCard from './layout/SeasonList/SeasonInfoCard'
+import Navbar from './layout/SeriesInfoPage/Navbar'
 
 
 const ShowInfo = () => {
@@ -75,27 +76,41 @@ const ShowInfo = () => {
         FetchData();
         
     }, [])     //avoid the cycle of fetching data every time the page is re-rendered
+
+    const [tab, setTab] = useState('seasons');
+    const tempFunction = (target) =>
+    {
+        console.log('click');
+        console.log(target);
+        setTab(target);
+    }
     
        
     if(data)//renderes page after data is fetched
     return (
         (<div style={{backgroundColor: "black"}}>
         <div className="header" style={bannerCss}>
+            
             <img src={data.poster} height="70%" style={{marginTop: "50px"}} alt="a;df"></img>
+            
             <div className="details" style={{marginLeft : "100px", marginTop:"50px"}}>
                 <Title data={data}></Title>
                 <Description data={data}></Description>
                 <SeriesDetails data={data}></SeriesDetails>
                 <br></br>
                 <Genres data={data}></Genres>
+                
                 <div style={{display:"flex"}}>
                     <button className="button red">+ Currently Watching</button>
                     <button className="button goldenrod" >+ Watch Later</button>
                 </div>
+            
             </div>
         </div>
+        
         <div>
-            {SeasonCards}
+            <Navbar tempFunction={tempFunction}></Navbar>
+            {tab === 'seasons' ? SeasonCards : <></>}
         </div>
         </div>) 
     )

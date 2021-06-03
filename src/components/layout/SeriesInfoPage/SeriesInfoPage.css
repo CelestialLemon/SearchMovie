@@ -121,3 +121,14 @@
 .button.plain:active {
   background: rgba(255, 255, 255, 0.45);
 }
+
+.blacknavbar
+{
+  font-size : 20px;
+}
+
+.blacknavbar .item
+{
+  margin-right: 20%;
+  white-space: nowrap;
+}
