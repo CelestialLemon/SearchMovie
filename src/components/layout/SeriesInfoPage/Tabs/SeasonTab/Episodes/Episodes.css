@@ -10,6 +10,8 @@
 .episodeContainer
 {
     min-width: 20%;
+    margin-right: 2%;
+    margin-left: 2%;
     margin-bottom: 40px;
     transition: transform .4s;
 }
