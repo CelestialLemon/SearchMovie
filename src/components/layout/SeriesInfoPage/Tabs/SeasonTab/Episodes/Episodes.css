@@ -1,0 +1,44 @@
+.temp
+{
+    background-color: black;
+    display : grid;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    padding: 5%;
+    min-width: 100%;
+}
+
+.episodeContainer
+{
+    min-width: 20%;
+    margin-bottom: 40px;
+    transition: transform .4s;
+}
+
+.episodeContainer:hover
+{
+    transform: scale(1.25);
+   
+}
+
+.episodeContainer .poster
+{
+    height: 200px;
+    border-radius: 0px;
+}
+
+.episodeContainer .title
+{
+    font-size : 21px;
+    color : white;
+    margin-top: 10px;
+    padding-left: 5px;
+   
+}
+
+.episodeContainer .overview
+{
+    font-size : 16px;
+    color : rgb(255, 255, 255, 0.7);
+    max-width: 20%;
+}
+

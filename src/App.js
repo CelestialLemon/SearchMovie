@@ -3,7 +3,7 @@ import './App.css';
 import Home from './components/Home'
 import Temp from './components/Temp'
 import ShowInfo from './components/ShowInfo'
-import SeasonInfoCard from './components/layout/SeasonList/SeasonInfoCard'
+import SeasonInfoCard from './components/layout/SeriesInfoPage/Tabs/SeasonTab/SeasonInfoCard'
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/tv/:id" component={ShowInfo}></Route>
           <Route exact path="tv/:id/seasons" component={SeasonInfoCard}></Route>
-          </Switch>
+         </Switch>
       </Router>
     </div>
   );

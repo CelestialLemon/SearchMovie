@@ -21,8 +21,9 @@
   font-size: 50px;
   line-height: 60px;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  line-height: 26px;
+ 
   color: rgb(255, 255, 255);
+  line-height: 50pt;
 }
 
 .header .details .description {
@@ -95,7 +96,7 @@
   transition: background-color 0.3s ease;
 }
 .button.red:active {
-  background: rgba(255, 69, 0, 0.87)
+  background: rgba(255, 69, 0, 1)
 }
 
 .button.goldenrod {
@@ -107,7 +108,7 @@
     transition: background-color 0.3s ease;
 }
 .button.goldenrod:active {
-    background: rgb(255, 165, 0, 0.8)
+    background: rgb(255, 165, 0, 1)
   }
   
 
@@ -122,13 +123,34 @@
   background: rgba(255, 255, 255, 0.45);
 }
 
-.blacknavbar
+.navbar
 {
-  font-size : 20px;
+  display: block;
+  list-style-type: none;
+  background-color: black;
+  margin-top: 2%;
+  padding-left: 8%;
 }
 
-.blacknavbar .item
+.navbar .item
 {
-  margin-right: 20%;
-  white-space: nowrap;
+  margin-right: 1%;
+  border-width : 1px;
+  border-color: orange;
+  color : orange;
+  font-size: 18px;
+  border-radius: 50px;
 }
+
+.navbar .item:hover
+{
+  background-color: rgb(245, 197, 108);
+  color : black;
+}
+
+.navbar .item:active
+{
+  background-color: orange;
+  color : black;
+}
+

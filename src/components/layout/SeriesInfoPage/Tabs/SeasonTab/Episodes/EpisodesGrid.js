@@ -1,13 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import analyze from 'rgbaster'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
 
-import './layout/SeriesInfoPage/Tabs/SeasonTab/Episodes/Episodes.css'
+import './Episodes.css'
 
-const Temp = () => {
-
-    const id = 1399, seasonNumber = 3;
+const Episodes = ({id, seasonNumber}) => {
 
     const [episodeData, setEpisodeData] = useState(null);
 
@@ -15,7 +12,7 @@ const Temp = () => {
     {
         try
         {
-            const res = await axios.get("https://api.themoviedb.org/3/tv/46261/season/2?api_key=06353fd3792f2599dd5cb140df26c423");
+            const res = await axios.get("https://api.themoviedb.org/3/tv/" + id + "/season/" + seasonNumber, {params  : {api_key : "06353fd3792f2599dd5cb140df26c423"}});
             
             setEpisodeData(res.data.episodes);
             console.log(res.data.episodes);
@@ -27,7 +24,6 @@ const Temp = () => {
     }
 
     const Episodes = [];
-
     if(episodeData)
     {
         episodeData.forEach((episode, index) => {
@@ -36,29 +32,23 @@ const Temp = () => {
 
             Episodes.push(
             <div className="episodeContainer">
-                <img className="poster" src={"https://image.tmdb.org/t/p/original" + episode.still_path}></img>
+                <img className="poster" src={"https://image.tmdb.org/t/p/original" + episode.still_path} ></img>
                 <h3 className="title">{(index + 1) + ". " + episode.name}</h3>
             </div>)
         });
     }
 
-
     useEffect(() =>
     {
         FetchEpisodeData();
-    }, [])
+    }, [seasonNumber])
     
-    if(episodeData)
-     return (
-       <div className="temp">
-           {Episodes}
-           
-           
 
-       </div>
+    return (
+        <div className="temp">
+            {Episodes}
+        </div>
     )
-    else
-    return (<h3>Loading</h3>)
 }
 
-export default Temp
+export default Episodes
