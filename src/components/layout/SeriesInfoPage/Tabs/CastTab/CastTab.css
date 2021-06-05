@@ -15,6 +15,7 @@
 .castContainer .profilepicture
 {
     width: 220px;
+    min-height: 85%;
 }
 
 .profileContainer .name
