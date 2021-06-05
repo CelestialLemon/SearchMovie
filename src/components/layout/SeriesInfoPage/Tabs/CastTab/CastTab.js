@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect} from 'react'
 import axios from 'axios'
 
+import './CastTab.css'
+
 const CastTab = ({ id }) => {
     const [castData, setCastData] = useState(null);
     const [numOfCastToShow, setNumOfCastToShow] = useState(47);
@@ -38,10 +40,10 @@ const CastTab = ({ id }) => {
             if(castData.cast[i])
             someVar.push(
                 <div className="profileContainer">
-                <img className="profilepicture" src={"http://image.tmdb.org/t/p/original" + castData.cast[i].profile_path}></img>
-                <h3 className="name">{castData.cast[i].name}</h3>
-                <h3 className="charactername">{"As " + castData.cast[i].roles[0].character}</h3>
-            </div>
+                    <img className="profilepicture" src={"http://image.tmdb.org/t/p/original" + castData.cast[i].profile_path}></img>
+                    <h3 className="name">{castData.cast[i].name}</h3>
+                    <h3 className="charactername">{"As " + castData.cast[i].roles[0].character}</h3>
+                </div>
             );
         }
 

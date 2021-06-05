@@ -71,7 +71,7 @@ const ShowInfo = () => {
         <div>
             {activeTab == "SeasonsTab" ? <SeasonTab id={id} data={data}></SeasonTab> : <></>}
             {activeTab == "CastTab" ? <CastTab id={id}></CastTab> : <></>}
-            {activeTab == "ImagesTab" ? <ImagesTab></ImagesTab> : <></>}
+            {activeTab == "ImagesTab" ? <ImagesTab id={id}></ImagesTab> : <></>}
             {activeTab == "RecommendedTab" ? <RecommendedTab></RecommendedTab> : <></>}
         </div>
         </div>) 
