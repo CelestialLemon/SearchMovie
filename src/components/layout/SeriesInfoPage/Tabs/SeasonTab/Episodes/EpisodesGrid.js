@@ -45,7 +45,7 @@ const Episodes = ({id, seasonNumber}) => {
     
 
     return (
-        <div className="temp">
+        <div className="episodeGridContainer">
             {Episodes}
         </div>
     )

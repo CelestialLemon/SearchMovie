@@ -1,0 +1,42 @@
+.castContainer
+{
+    display: grid;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+    background-color: black;
+    color : white;
+}
+
+.castContainer .profileContainer
+{
+    padding: 50px;
+    text-align: center;
+}
+
+.castContainer .profilepicture
+{
+    width: 220px;
+}
+
+.profileContainer .name
+{
+    font-size: 20px;
+}
+
+.profileContainer .charactername
+{
+    font-size: 15px;
+    color : rgb(255,255,255, 0.8); 
+}
+
+.loadmore
+{
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50px;
+    background-color: black;
+    color : orange;
+    margin-left: 45%;
+}
