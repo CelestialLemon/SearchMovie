@@ -1,9 +1,9 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const Navbar = ({onTabChange}) => {
+const Navbar = ({onTabChange, currentActiveTab}) => {
 
-    const [activeTab, setActiveTab] = useState("SeasonsTab");
+    const [activeTab, setActiveTab] = useState(currentActiveTab);
 
      let buttonCSS = {
         "SeasonsButtonCSS" : {
@@ -57,6 +57,11 @@ const Navbar = ({onTabChange}) => {
         onTabChange(e.target.value);
         setActiveTab(e.target.value);
     }
+
+    useEffect(() =>
+    {
+        setActiveTab(currentActiveTab);
+    }, [currentActiveTab]);
 
     return (
         <div className="navbar">

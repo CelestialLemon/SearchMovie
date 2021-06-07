@@ -23,7 +23,7 @@ const CastTab = ({ id }) => {
     useEffect(() =>
     {
         FetchCastData();
-    }, [])
+    }, [id])
 
     const onLoadMoreClick = () =>
     {

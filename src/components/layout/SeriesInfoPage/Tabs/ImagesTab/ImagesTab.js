@@ -12,7 +12,6 @@ const ImagesTab = ({id}) => {
         try
         {
             const res = await axios.get("https://api.themoviedb.org/3/tv/" + id +"/images", {params : {api_key : "06353fd3792f2599dd5cb140df26c423"}});
-            console.log("num of bacdrops : " + res.data.backdrops.length + " num of posters : " + res.data.posters.length);
             setImagesData(res.data);
         }catch(err)
         {
@@ -23,7 +22,7 @@ const ImagesTab = ({id}) => {
     useEffect(() =>
     {
         FetchImagesData();
-    }, []);
+    }, [id]);
 
     if(imagesData)
     {
@@ -34,8 +33,7 @@ const ImagesTab = ({id}) => {
        while(posterIndex < imagesData.posters.length && backdropIndex < imagesData.backdrops.length)
        {
            let rng = Math.floor(Math.random() * 2);
-           console.log("loop number " + loopNumber + " result :" + rng);
-
+           
            if(rng === 0)
            {
                //insert poster into current colummn
@@ -76,9 +74,7 @@ const ImagesTab = ({id}) => {
            loopNumber++;
        }
 
-       console.log("number of backdrops printed " + backdropIndex);
-       console.log(" num of posters printed : " + posterIndex);
-    
+      
 
         return(
             <div className="imagesContainer">

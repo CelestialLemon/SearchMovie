@@ -1,0 +1,42 @@
+.recommendedListContainer
+{
+    display : grid;
+    padding-left : 3%;
+    padding-right: 3%;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+
+.heading
+{
+    font-size : 25px;
+    color : white;
+    padding: 3%;
+}
+
+.recommendedShowContainer
+{
+    justify-content: left;
+    transition: transform .4s ease;
+}
+
+.recommendedShowContainer .poster
+{
+    width: 210px;
+    height: auto;
+    border-radius: 0px;
+}
+
+.recommendedShowContainer .title
+{
+    padding: 5px;
+    font-size: 20px;
+    color : rgb(255, 255, 255, 0.95);
+    max-width: 210px;
+}
+
+.recommendedShowContainer:hover
+{
+    transform: scale(1.25);
+   
+}
+

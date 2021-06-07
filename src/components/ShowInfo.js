@@ -55,8 +55,8 @@ const ShowInfo = () => {
     useEffect(() =>
     {
         FetchData();
-        
-    }, [])     //avoid the cycle of fetching data every time the page is re-rendered
+        setActiveTab('SeasonsTab')
+    }, [id])     //avoid the cycle of fetching data every time the page is re-rendered
    
        
     if(data)//renderes page after data is fetched
@@ -65,14 +65,14 @@ const ShowInfo = () => {
         <Banner data={data}></Banner>
         
         <div>
-            <Navbar onTabChange={onTabChange}></Navbar>
+            <Navbar currentActiveTab={activeTab} onTabChange={onTabChange}></Navbar>
         </div>
         
         <div>
             {activeTab == "SeasonsTab" ? <SeasonTab id={id} data={data}></SeasonTab> : <></>}
             {activeTab == "CastTab" ? <CastTab id={id}></CastTab> : <></>}
             {activeTab == "ImagesTab" ? <ImagesTab id={id}></ImagesTab> : <></>}
-            {activeTab == "RecommendedTab" ? <RecommendedTab></RecommendedTab> : <></>}
+            {activeTab == "RecommendedTab" ? <RecommendedTab id={id}></RecommendedTab> : <></>}
         </div>
         </div>) 
     )
