@@ -3,35 +3,42 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useHistory} from 'react-router-dom'
 
+import './layout/Home/Home.css'
+import ValidateLocalToken from '../functions/ValidateLocalToken'
+import ValidateSessionToken from '../functions/ValidateSessionToken'
+
+
 const Home = () => {
-    const [searchString, setSearchString] = useState('');
-    const [data, setData] = useState(null);
-
+    
     let history = useHistory();
-    
-    const onSearchClick = async () =>
-    {
-        try
+    const bannerCss = 
         {
-            const res = await axios.get("https://api.themoviedb.org/3/search/tv", {params: { api_key : "06353fd3792f2599dd5cb140df26c423", query : searchString}})
-            console.log(res.data);
-            setData(res.data);
-            history.push("/tv/" + res.data.results[0].id);
-            //setShowResult(true);
-            
-        }catch(err)
-        {
-            console.error(err);
-        }
-    }
+            height : "720px",
+            minHeight : "720px",
+            boxShadow: "0px -16px 43px 21px rgba(0, 0, 0, 0.6)",
+            backgroundSize : "100%",
+            background: "linear-gradient( rgba(0, 0, 0, 0)50%, rgba(0, 0, 0, 1)), url("+ "http://image.tmdb.org/t/p/original/kysKBF2CJG9qfQDSCDaboJrkZy1.jpg" + ") no-repeat center center fixed",
+            boxShadow: "inset 0px 0px 0px 0px black"
+        };
 
-    
+        const ValidateUser = async () =>
+        {
+            const res = await ValidateLocalToken();
+            if(res === false)
+            {
+                const sessionRes = await ValidateSessionToken();
+                if(sessionRes === false)
+                {
+                    history.push("/login");
+                }
+
+            }
+        }
+
+        ValidateUser();
+
     return (
-        <div>
-            <label>Search for the tv show you want </label>
-            <input type="text" onChange = {(e) => setSearchString(e.target.value)}></input>
-            <button onClick={onSearchClick}>Search</button>
-            
+        <div className="banner" style={bannerCss}>
         </div>
     )
 }

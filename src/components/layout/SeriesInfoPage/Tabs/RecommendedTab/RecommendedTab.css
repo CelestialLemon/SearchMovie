@@ -16,7 +16,7 @@
 .recommendedShowContainer
 {
     justify-content: left;
-    transition: transform .4s ease;
+    transition: transform .2s;
 }
 
 .recommendedShowContainer .poster

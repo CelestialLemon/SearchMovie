@@ -3,7 +3,8 @@ import './App.css';
 import Home from './components/Home'
 import Temp from './components/Temp'
 import ShowInfo from './components/ShowInfo'
-import SeasonInfoCard from './components/layout/SeriesInfoPage/Tabs/SeasonTab/SeasonInfoCard'
+import Login from './components/layout/Login/Login'
+import Signup from './components/layout/Login/Signup'
 
 
 function App() {
@@ -12,9 +13,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/temp" component={Temp}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/signup" component={Signup}></Route>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/tv/:id" component={ShowInfo}></Route>
-          <Route exact path="tv/:id/seasons" component={SeasonInfoCard}></Route>
          </Switch>
       </Router>
     </div>

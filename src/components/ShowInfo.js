@@ -13,7 +13,6 @@ import CastTab from './layout/SeriesInfoPage/Tabs/CastTab/CastTab'
 import ImagesTab from './layout/SeriesInfoPage/Tabs/ImagesTab/ImagesTab'
 import RecommendedTab from './layout/SeriesInfoPage/Tabs/RecommendedTab/RecommendedTab'
 
-
 const ShowInfo = () => {
     const { id } = useParams();      //tmdb id of the tv show to be displayed
 
@@ -61,7 +60,7 @@ const ShowInfo = () => {
        
     if(data)//renderes page after data is fetched
     return (
-        (<div style={{backgroundColor: "black"}}>
+        (<div style={{backgroundColor: "black", paddingBottom:"50px"}}>
         <Banner data={data}></Banner>
         
         <div>
