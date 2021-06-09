@@ -1,9 +1,9 @@
 .PageContainer
 {
+    max-height: 1200px;
     padding-top: 15%;
     padding-bottom: 25%;
-    padding-left: 37%;
-    align-items: center;
+    padding-left: 40%;
     justify-content: center;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://bit.ly/2E3scwW');
     background-position: center center;
@@ -67,6 +67,7 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 30px;
+    margin-bottom: 5px;
     border-radius: 60px;
     border-width: 0px;
     width: 300px;
@@ -81,6 +82,7 @@
 .formElement .forgotpassword
 {
     margin-left: 55%;
+    text-align: right;
     font-size: 15px;
     color : rgba(255, 255, 255, 0.671);
 
@@ -95,4 +97,23 @@
 {
     background-color: rgba(255, 69, 0, 1);   
 }
+
+.formElement .responseContainer
+{
+    text-align: center;
+    margin : 20px;
+    padding: 5px;
+    background-color: #1d1d1d;
+    width : 300px;
+    border-radius: 5px;
+    border-color: white;
+}
+
+.formElement .response
+{
+    font-size: 20px;
+    font-weight: 100;
+}
+
+
 

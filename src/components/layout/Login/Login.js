@@ -13,7 +13,9 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberOnDevice, setRememberOnDevice] = useState(false);
-
+    const [response, setResponse] = useState(null);
+    const [responseCSS, setResponseCSS] = useState({"color" : "white"});
+    
     
     const ValidateUser = async () =>
     {
@@ -41,7 +43,15 @@ const Login = () => {
             };
 
             const res = await axios.post("http://localhost:4000/users/login", user);
-            
+            setResponse(res.data.msg);
+            if(res.data.msg === "User doesn't exist" || res.data.msg === "password doesn't match")
+            {
+                setResponseCSS({color : "rgb(255, 0, 0)"});
+            }
+            if(res.data.msg === "token created" || res.data.msg === "logged In for session")
+            {
+                setResponseCSS({color : "green"})
+            }
             if(res.data.loggedIn == true)
             {
                 console.log(res.data.msg);
@@ -95,6 +105,16 @@ const Login = () => {
                 <div className="formElement">
                     <a className="forgotpassword" href="/signup">Sign-Up Here</a>
                 </div>
+                {
+                    response ? 
+                    <div className="formElement">
+                    <div style={responseCSS} className="responseContainer">
+                    <h3  className="response">{response}</h3>
+                    </div>
+                </div>
+                :
+                <></>
+                }
                 
           </div>
        </div>

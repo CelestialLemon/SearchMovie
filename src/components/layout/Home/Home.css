@@ -1,4 +1,96 @@
 .banner
 {
-    display: flex;
+     display: flex;
+}
+
+.banner .searchbar
+{
+    margin-right: 20px;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.banner .mylists
+{
+    height: 40px;
+    margin : 20px;
+    background-color: black;
+    color : rgba(255, 69, 0, 1);
+    border-radius: 5px;
+    border-width: 0px;
+    transition: color 0.25s ease;
+    transition: background-color 0.25s ease;
+}
+
+.banner .mylists:hover
+{
+    background-color: rgba(255, 69, 0, 1);
+    color : black;
+}
+
+.banner .mylists:active
+{
+    background-color: rgba(255, 165, 0, 1);
+    color : black;
+}
+
+.banner .listsMenuContainer
+{
+    display: block;
+    padding : 20px;
+    max-width: 290px;
+    height: fit-content;
+    background-color: black;
+    border-radius: 10px;
+
+}
+
+.banner .listsMenuContainer .item
+{
+    margin-bottom: 10px;
+    width: 250px;
+    height: 50px;
+}
+
+.popularShowListContainer
+{
+    display : grid;
+    padding-left : 3%;
+    padding-right: 3%;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+
+.heading
+{
+    font-size : 25px;
+    color : white;
+    padding: 3%;
+}
+
+.popularShowContainer
+{
+    justify-content: left;
+    border-radius: 0px;
+    transition: transform .2s;
+}
+
+.popularShowContainer .poster
+{
+    width: 210px;
+    height: auto;
+    border-radius: 0px;
+}
+
+.popularShowContainer .title
+{
+    padding: 5px;
+    font-size: 20px;
+    color : rgb(255, 255, 255, 0.95);
+    max-width: 210px;
+}
+
+.popularShowContainer:hover
+{
+    transform: scale(1.25);
+   
 }

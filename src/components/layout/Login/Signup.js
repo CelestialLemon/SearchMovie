@@ -7,18 +7,16 @@ const Signup = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberOnDevice, setRememberOnDevice] = useState(false);
-
-    let displayResponse = false;
-    let response = ''
+    const [response, setResponse] = useState('');
+   
 
     const onSubmitClick = async (e) =>
     {
         try
         {
             const res = await axios.post("http://localhost:4000/users/signup", {"username" : username, "password" : password});
-            displayResponse = true;
-            response = res.data;
+            //setDisplayResponse(true);
+            setResponse(res.data.msg);
         }catch(err)
         {
             console.log(err);
@@ -47,9 +45,11 @@ const Signup = () => {
                 <div className="formElement">
                     <a className="forgotpassword" href="/login">Login instead?</a>
                 </div>
-                {displayResponse ? <div className="formElement">
-                    <h3 className="forgotpassword">{response}</h3>
-                </div> : (<></>)}
+                <div className="formElement">
+                    <div className="responseContainer">
+                    <h3 className="response">{response}</h3>
+                    </div>
+                </div>
                 
           </div>
        </div>  
