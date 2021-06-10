@@ -78,24 +78,26 @@ const Searchbar = () => {
 
     useEffect(() =>
     {
-        if(searchData.results.length > 0)
+        if(searchData)
         {
-            for(var i=0; i<searchData.results.length; i++)
+            if(searchData.results.length > 0)
             {
-                const showId = searchData.results[i].id;
-                searchedShowsJSX.push(
-                  <SearchedShowComponent data={searchData.results[i]}></SearchedShowComponent>  
-                );
+                for(var i=0; i<searchData.results.length; i++)
+                {
+                    const showId = searchData.results[i].id;
+                    searchedShowsJSX.push(
+                    <SearchedShowComponent data={searchData.results[i]}></SearchedShowComponent>  
+                    );
+                }
+
+                setSearchedShowsCards(searchedShowsJSX)
+                console.log("cards changed")
             }
-
-            setSearchedShowsCards(searchedShowsJSX)
-            console.log("cards changed")
+            else
+            {
+                setSearchedShowsCards(<h3 className="noshowsfound">No TV Shows/Series found</h3>);
+            }
         }
-        else
-        {
-            setSearchedShowsCards(<h3 className="noshowsfound">No TV Shows/Series found</h3>);
-        }
-
         
     }, [searchData])
 
