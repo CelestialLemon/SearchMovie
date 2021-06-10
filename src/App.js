@@ -7,10 +7,11 @@ import Login from './components/layout/Login/Login'
 import Signup from './components/layout/Login/Signup'
 
 
+
 function App() {
   return (
     <div>
-      <Router>
+     <Router>
         <Switch>
           <Route exact path="/temp" component={Temp}></Route>
           <Route exact path="/login" component={Login}></Route>

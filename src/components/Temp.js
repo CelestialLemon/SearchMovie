@@ -1,29 +1,20 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import analyze from 'rgbaster'
-import axios from 'axios'
+import { useState } from 'react'
+import Compress from 'react-image-file-resizer'
 
-import './layout/SeriesInfoPage/Tabs/ImagesTab/ImagesTab.css'
 const Temp = () => {
 
-    
-
-    const onSubmitClick = (e) =>
-    {
-        console.log("Submit was clicked");
-    }
-
-    
-
+    const [res, setRes] = useState(null);
+    Compress.imageFileResizer("http://image.tmdb.org/t/p/original/kysKBF2CJG9qfQDSCDaboJrkZy1.jpg", 600, 360, 'JPG', 100, 0, (uri) => console.log(uri))
+  
+    if(res)
     return(
        <div>
-           <h3>Username</h3>
-           <input type="text" placeholder="Enter your username"></input>
-           <h3>Password</h3>
-           <input type="password" placeholder="Enter your password"></input>
-           <button onClick={onSubmitClick} type="submit">Submit</button>
+        <img src={res}></img>
        </div>
    )
+   else
+   return (<h3>loading</h3>)
 }
 
 export default Temp

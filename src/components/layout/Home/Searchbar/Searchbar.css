@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 500px;
   height: 40px;
+  overflow: auto;
   background-color: #000;
   border-radius: 6px;
   box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
@@ -54,4 +55,83 @@
   vertical-align: middle;
   margin-right: 10px;
   cursor: pointer;
+}
+
+.searchedShowContainer
+{
+  margin-bottom: 20px;
+  display: flex;
+  height: 100px;
+  width: 400px;
+  padding : 10px 10px;
+  cursor: pointer;
+
+}
+
+.searchedShowContainer .poster
+{
+  height: 110px;
+  border-radius: 0px;
+  min-width: 75px;
+}
+
+.searchedShowContainer .details
+{
+  display: block;
+}
+
+.searchedShowContainer .details .title
+{
+  padding: 5px 0px 0px 10px;
+  font-size: 20px;
+  color : rgb(255, 165, 0);
+}
+
+.searchedShowContainer .details .year
+{
+  
+  padding: 5px 0px 0px 10px;
+  font-size: 15px;
+  color : rgb(255, 69, 0);
+  vertical-align: middle;
+}
+
+.noshowsfound
+{
+  font-size: 20px;
+  color :rgb(255, 69, 0, 0.7);
+  margin-left: 25%;
+  margin-top: 50%;
+}
+
+.loading-spinner
+{
+  width: 20px;
+  margin-left: 240px;
+  margin-top: 280px;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track
+{
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-image: linear-gradient(rgb(255, 165, 0), rgb(255, 69, 0));
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover
+{
+  background-image: linear-gradient(rgb(255, 69, 0), rgb(255, 69, 0));
+}
+
+::-webkit-scrollbar-thumb:active
+{
+  background-image: linear-gradient(rgb(255, 165, 0), rgb(255, 165, 0));
 }
