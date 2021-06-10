@@ -42,7 +42,7 @@ const Login = () => {
                 "rememberOnDevice" : rememberOnDevice
             };
 
-            const res = await axios.post("http://localhost:4000/users/login", user);
+            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/users/login", user);
             setResponse(res.data.msg);
             if(res.data.msg === "User doesn't exist" || res.data.msg === "password doesn't match")
             {

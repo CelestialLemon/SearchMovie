@@ -8,7 +8,7 @@ const ValidateLocalToken = async () =>
 
     try
     {
-        const res = await axios.post("http://localhost:4000/users/login", {headers: {'authorization' : 'Bearer ' + localStorage.getItem("accessToken")}});
+        const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/users/login", {headers: {'authorization' : 'Bearer ' + localStorage.getItem("accessToken")}});
         if(res.data.msg === "logged in with token")
         return true;
         else
