@@ -15,6 +15,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 const Home = () => {
     
     let history = useHistory();
+    
 
     const bannerCss = 
         {

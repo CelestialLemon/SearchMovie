@@ -10,7 +10,7 @@ import MyLists from './components/layout/Home/MyLists/MyLists';
 
 function App() {
   return (
-    <div>
+    <div> 
      <Router>
         <Switch>
           <Route exact path="/temp" component={Temp}></Route>
