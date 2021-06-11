@@ -21,7 +21,8 @@
 
 .ListContainer .listHeader .listName
 {
-    padding: 5px 0px;
+    padding: 10px 0px;
+    font-weight: 100;
     color : white;
 }
 
@@ -30,7 +31,7 @@
     transform: scale(2);
     margin-right: 40px;
     margin-left: auto;
-    margin-top : 17px;
+    margin-top : 22px;
     color : white;
     cursor: pointer;
 }

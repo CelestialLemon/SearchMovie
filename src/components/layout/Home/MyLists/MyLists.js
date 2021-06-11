@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import './MyLists.css'
 import List from './List'
+import AddNewList from './AddNewList'
 
 const MyLists = () => {
 
@@ -46,9 +47,9 @@ const MyLists = () => {
             <div className="ListsContainer">
                 {listsJSX}
             </div>
-            <div className="addnewlist">
-                <h3 className="text">+ ADD NEW LIST</h3>
+            <div className="divider">
             </div>
+            <AddNewList></AddNewList>
         </div>
     )
 }

@@ -8,6 +8,7 @@
 
 .HeaderContainer
 {
+
     width : 400px;
     height: auto;
     color : rgb(255, 165, 0);
@@ -26,21 +27,12 @@
     margin: 50px 50px;
 }
 
-.addnewlist
+
+.divider
 {
-    margin : 50px 50px;
-    width : 80vw;
-    background: linear-gradient(to right, #ff0000, #8F00FF);
-    height: 50px;
-    border-radius: 10px;
-    cursor: pointer;
+    margin : 0px 60px;
+    width: 79vw;
+    height: 1px;
+    background-color: white;
 }
 
-.addnewlist .text
-{
-    vertical-align: middle;
-    color : white;
-    padding-left: 40%;
-    padding-top: 8px;
-    font-weight: 100;
-}

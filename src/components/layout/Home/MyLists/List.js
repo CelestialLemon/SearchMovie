@@ -8,7 +8,7 @@ import './List.css'
 
 const List = ({listName, color, data}) => {
 
-    color = "linear-gradient(to right, #ff0000,#8F00FF)"
+    color = 'linear-gradient(to right, '+ data.color1 +', '+ data.color2 +' )'
 
    const [isExpanded, setIsExpanded] = useState(false);
 
@@ -45,9 +45,15 @@ const List = ({listName, color, data}) => {
     {
         ListContainerCSS = {
             background : color,
-            height : "auto"
+            height : ((data.shows.length * 70) + 60) + "px"
+        }
+        
+        if(data.shows.length === 0)
+        {
+            ListContainerCSS.height = "100px"
         }
     }
+
 
 
     let showsJSX = [];
