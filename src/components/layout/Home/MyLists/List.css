@@ -1,0 +1,99 @@
+.ListContainer
+{
+    display: block;
+    padding-left : 20px;
+    padding-bottom: 20px;
+    width: 80vw;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: height 200ms ease;
+}
+
+.ListContainer .listHeader
+{
+    display: flex;
+    width: 80vw;
+    height: 55px;
+    border-radius: 10px;
+    
+}
+
+.ListContainer .listHeader .listName
+{
+    padding: 5px 0px;
+    color : white;
+}
+
+.ListContainer .listHeader .arrow
+{
+    transform: scale(2);
+    margin-right: 40px;
+    margin-left: auto;
+    margin-top : 17px;
+    color : white;
+    cursor: pointer;
+}
+
+.ListContainer .show
+{
+    display: flex;
+    width : 70vw;
+    height : 60px;
+    padding-left: 3%;
+    margin-bottom: 10px;
+    background-color: black;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+
+.ListContainer .show .name
+{
+   font-size: 25px;
+   color : rgba(255, 255, 255, 0.85);
+   padding-top: 13px;
+   font-weight: 100;
+}
+
+.ListContainer .show .delete
+{
+    margin-right: 30px;
+    margin-left: auto;
+    margin-top : 20px;
+    color : rgba(255, 255, 255, 0.80);
+    transform: scale(2);
+    transition: color 250ms ease;
+}
+
+.ListContainer .show .delete:hover
+{
+    color: rgb(255, 69, 0);
+}
+
+.ListContainer .show .delete:active
+{
+    color: rgb(255, 165, 0);
+}
+
+.ListContainer .show .details
+{
+    display: flex;
+    margin-right: 3%;
+    margin-left: auto;
+   color : rgba(255, 255, 255, 0.80);
+   padding-top: 10px;
+}
+
+.ListContainer .show .details .detail
+{
+    font-size: 20px;
+    margin: 8px 5px;
+}
+
+.ListContainer .show .details .divider
+{
+    margin: 0px 5px;
+}
+
+

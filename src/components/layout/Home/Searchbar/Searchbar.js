@@ -88,7 +88,7 @@ const Searchbar = () => {
                     {
                         const showId = searchData.results[i].id;
                         searchedShowsJSX.push(
-                        <SearchedShowComponent data={searchData.results[i]}></SearchedShowComponent>  
+                          <SearchedShowComponent data={searchData.results[i]}></SearchedShowComponent>  
                         );
                     }
 

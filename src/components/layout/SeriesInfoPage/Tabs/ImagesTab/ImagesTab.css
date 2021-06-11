@@ -1,6 +1,7 @@
 .imagesContainer
 {
-    padding : 5%
+    padding : 5%;
+    width: 100%;
 }
 
 .imagesContainer .images

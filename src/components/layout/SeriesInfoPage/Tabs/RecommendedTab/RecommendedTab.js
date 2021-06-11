@@ -47,6 +47,7 @@ const RecommendedTab = ({ id }) => {
     let RecommendedShows = [];              //stores the jsx elements of recommended shows to be displayed
     if(recommendationsData)        
     {
+        if(recommendationsData.results.length > 0)
         for(var i=0; i<=5; i++)
         {
             const showId = recommendationsData.results[i].id
@@ -62,6 +63,7 @@ const RecommendedTab = ({ id }) => {
     let SimilarShows = [];                      //stores the jsx elements of similar shows to be displayed
     if(similarShowsData)
     {
+        if(similarShowsData.results.length > 0)
         for(var i=0; i<=5; i++)
         {
             const showId = similarShowsData.results[i].id
