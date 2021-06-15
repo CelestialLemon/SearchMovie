@@ -1,5 +1,6 @@
 .ListContainer
 {
+    overflow-wrap: break-word;
     display: block;
     padding-left : 20px;
     padding-bottom: 20px;
@@ -24,16 +25,38 @@
     padding: 10px 0px;
     font-weight: 100;
     color : white;
+    max-width: 80%;
 }
+
 
 .ListContainer .listHeader .arrow
 {
+    margin-top: 20px;
+    margin-right: 45px;
+    margin-left: 20px;
     transform: scale(2);
-    margin-right: 40px;
-    margin-left: auto;
-    margin-top : 22px;
     color : white;
     cursor: pointer;
+}
+
+.ListContainer .listHeader  .arrow:active
+{
+    color :rgb(255, 69, 0);
+}
+
+.ListContainer .listHeader .delete
+{
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: auto;
+    transform: scale(2);
+    color : white;
+    cursor: pointer;
+}
+
+.ListContainer .listHeader .delete:active
+{
+    color : rgb(255, 69, 0);
 }
 
 .ListContainer .show
@@ -62,7 +85,7 @@
     margin-right: 30px;
     margin-left: auto;
     margin-top : 20px;
-    color : rgba(255, 255, 255, 0.80);
+    color : rgba(255, 255, 255, 0.8);
     transform: scale(2);
     transition: color 250ms ease;
 }
@@ -96,5 +119,25 @@
 {
     margin: 0px 5px;
 }
+
+.ConfirmDeleteContainer
+{
+    position: fixed;
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding : 50px;
+    z-index: 1000;
+}
+
+.page-mask {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 
 

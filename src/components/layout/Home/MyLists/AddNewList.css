@@ -26,19 +26,21 @@
 }
 .AddListContainer .AddListForm
 {
+    display: flex;
     margin: 20px 0px;
     height : 20px;
     width : 80vw;
     transition: height 200ms ease;
+    flex-wrap: wrap;
 }
 
 
 .AddListContainer .AddListForm .nameInput
 {
     height: 50px;
-    margin: 20px 10% 10px 10%;
-    padding : 0px 10px;
-    width: 80%;
+    width: 63vw;
+    margin : 2vh 2vw 0vh 2vw;
+    padding-left : 1vw;
     background: rgb(54, 54, 54);
     color : white;
     border-width: 0px;
@@ -49,51 +51,37 @@
 
 .AddListContainer .AddListForm .nameInput::placeholder
 {
+
     font-size: 20px;
     color : rgba(255, 255, 255, 0.6);
-}
-
-.AddListContainer .AddListForm .colorButton1
-{
-    height: 50px;
-    margin: 20px 10% 10px 10%;
-    padding : 0px 10px;
-    width: 35%;
-    border-width: 0px;
-    border-radius: 10px;
-    font-size: 20px;
-}
-
-.AddListContainer .AddListForm .colorButton2
-{
-    height: 50px;
-    padding : 0px 10px;
-    width: 35%;
-    border-width: 0px;
-    border-radius: 10px;
-    font-size: 20px;
 }
 
 .AddListContainer .AddListForm .submitButton
 {
     height: 50px;
-    margin: 60px 10% 10px 10%;
-    padding : 0px 10px;
-    width: 80%;
-    background-color: rgba(255, 165, 0, 0.288);
+    width: 10vw;
+    margin : 2vh 2vw 0vh 0vw;
+    background: linear-gradient(to right, #ff0000, #8F00FF);
     color : white;
     border-width: 0px;
     border-radius: 10px;
     font-size: 25px;
+    transition:  background 250ms ease;
 }
 
-.AddListContainer .AddListForm .submitButton:hover
+.AddListContainer .AddListForm .error
 {
-    background-color: rgba(255, 165, 0, 0.576); 
+    margin: 0vh 30vw 0vh auto;
+    text-align:center;
+    padding : 0.7vw;
+    width: 20vw;
+    height: 3vw;
+    background-color: rgb(255, 196, 196);
+    color : rgb(255, 69, 0);
+    font-size: 25px;
+    font-weight: 100;
+    border-radius: 50px;
 }
 
-.AddListContainer .AddListForm .submitButton:active
-{
-    background-color: rgba(255, 165, 0, 1); 
-}
+
 

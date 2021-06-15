@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router'
 import { TwitterPicker } from 'react-color'
 import Tippy from '@tippyjs/react'
 
 import './AddNewList.css'
 
-const AddNewList = () => {
+const AddNewList = ({onNewListAdded}) => {
 
+    let history = useHistory();
     const [isExpanded, setIsExpanded] = useState(false);
     const [listName, setListName] = useState('');
-
-    const [color1, setColor1] = useState('#fff');
-    const [color2, setColor2] = useState('#fff');
+    const [displayError, setDisplayError] = useState(false);
 
     const expandContainer = () =>
     {
@@ -26,9 +26,7 @@ const AddNewList = () => {
 
     let containerCSS;
     let formCSS = {};
-    let previewCSS = {
-        background : "linear-gradient(to right, "+ color1 +", " + color2 +")"
-    }
+    
     
 
     if(isExpanded)
@@ -40,23 +38,33 @@ const AddNewList = () => {
         formCSS = {
             border : "2px solid orange",
             borderRadius : "10px",
-            height : "300px"
+            height : "150px"
         }
 
     }
 
     const onSubmitClick = async () =>
     {
+        if(listName !== '')
         try
         {
             const token = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
             const data = {
-                "listName" : listName,
-                "color1" : color1,
-                "color2" : color2
+                "listName" : listName
             }
             const res = await axios.post("http://localhost:4000/lists/addlist", data, {headers : {'authorization' : 'Bearer ' + token}})
-            console.log(res.data);
+           
+            if(res.data.msg === "list already exists")
+            {
+                setDisplayError(true);
+            }
+            else
+            {
+                setDisplayError(false);
+                const listData = {"listName" : listName, "shows" : []};
+                onNewListAdded(listData);
+                setListName('');
+            }
         }catch(err)
         {
             console.log(err)
@@ -73,26 +81,15 @@ const AddNewList = () => {
             
             <div style={formCSS} className="AddListForm">
                 {isExpanded ? 
-                <div>
-                    
-                    <input style={previewCSS} className="nameInput" type="text" placeholder="Enter name for the list" onChange={(e) => setListName(e.target.value)}></input>
-                    <Tippy interactive={true} placement={'bottom'} content={<TwitterPicker
-                    color={color1}
-                    onChangeComplete={changedColor => {setColor1(changedColor.hex)}}
-                    ></TwitterPicker>}>
-                        <button style={{backgroundColor : color1}} className="colorButton1">Color left</button>
-                    </Tippy>
+            <input style={{background : "linear-gradient(to right, rgb(255, 69, 0), rgb(255, 165, 0))"}} className="nameInput" type="text" placeholder="Enter name for the list" value={listName} onChange={(e) => setListName(e.target.value)}></input>
+              : <></>}
+                {isExpanded ? <button className="submitButton" onClick={onSubmitClick}>SUBMIT</button>
+             : <></>}
+           
+            {displayError ? <h3 className="error">List already exists!</h3> : <></>}
+            
 
-                    <Tippy interactive={true} placement={'bottom'} content={<TwitterPicker
-                    color={color2}
-                    onChangeComplete={changedColor => {setColor2(changedColor.hex)}}
-                    ></TwitterPicker>}>
-                        <button style={{backgroundColor : color2}} className="colorButton2">Color right</button>
-                    </Tippy>
-
-                    <button className="submitButton" onClick={onSubmitClick}>SUBMIT</button>
-            </div>
-            : <></>}
+            
             </div>
             
         </div>

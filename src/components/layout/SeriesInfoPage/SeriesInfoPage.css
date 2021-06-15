@@ -92,6 +92,8 @@
   border-width : 0px;
   font-size: 20px;
 }
+
+
 .button.red:hover {
   background: rgba(255, 69, 0, 0.562);
   transition: background-color 0.3s ease;
@@ -105,15 +107,75 @@
     border-width : 0px;
     font-size: 20px;
 }
-.button.goldenrod:hover {
+
+.button.red .icon
+{
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+
+
+.button.goldenrod:hover 
+{
     background: rgba(255, 165, 0, 0.562);
     transition: background-color 0.3s ease;
 }
-.button.goldenrod:active {
-    background: rgb(255, 165, 0, 1)
-  }
-  
 
+.button.goldenrod:active 
+{
+    background: rgb(255, 165, 0, 1)
+}
+
+.button.goldenrod .icon 
+{
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+  
+.button.blue 
+{
+  outline: none;
+  box-shadow: none;
+    background: rgba(68, 155, 255, 0.288);
+    border-width : 0px;
+    font-size: 20px;
+}
+
+.button.blue:hover 
+{
+    background: rgba(68, 155, 255, 0.562);
+    transition: background-color 0.3s ease;
+}
+
+.button.blue:active 
+{
+    background: rgb(68, 155, 255, 1)
+}
+
+.button.blue .icon 
+{
+  color : white;
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+#dropdown-basic:focus
+{
+  outline : none;
+  box-shadow: none;
+}
+
+.saveIcon
+{
+  color : white;
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
 
 .button.plain {
   background: rgba(255, 255, 255, 0.15);

@@ -1,10 +1,16 @@
 import React from 'react'
+import axios from 'axios'
 import Title from './Title'
 import Description from './Description'
 import Genres from './Genres'
 import SeriesDetails from './SeriesDetails'
+import AddToCustomListModal from './AddToCustomListModal'
+import { useState, useEffect } from 'react'
 
-import './SeriesInfoPage.css'
+import './SeriesInfoPage.css';
+import { Button, Dropdown, Form, Modal } from 'react-bootstrap'
+import { AiFillPlayCircle, AiFillForward, AiOutlineSave } from 'react-icons/ai';
+import { RiAddFill } from 'react-icons/ri';
 
 const Banner = ({data}) => {
 
@@ -25,6 +31,41 @@ const Banner = ({data}) => {
         };
     }
 
+    const [listsData, setListsData] = useState(null);
+
+    const FetchListsData = async () =>
+    {
+        try
+        {
+            const res = await axios.get('http://localhost:4000/lists/userlists', {headers : {'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}});
+            setListsData(res.data);
+        }catch(err)
+        {
+            console.log(err);
+        }
+    }
+
+    
+
+      //stores states of checkboxes temporarily and later is stored in state checkboxesState
+
+
+    
+    
+
+    
+   
+    const DropDownButton = listsData ? (
+        <AddToCustomListModal listsData={listsData}></AddToCustomListModal>
+        ) : <></>
+
+
+    useEffect(() =>
+    {
+        FetchListsData();
+    }, []);
+
+   
 
     return (
         <div>
@@ -40,9 +81,15 @@ const Banner = ({data}) => {
                 <Genres data={data}></Genres>
                 
                 <div style={{display:"flex"}}>
-                    <button className="button red">+ Currently Watching</button>
-                    <button className="button goldenrod" >+ Watch Later</button>
+                    <button className="button red">
+                        <AiFillPlayCircle className="icon"></AiFillPlayCircle>
+                        Currently Watching</button>
+                    <button className="button goldenrod" >
+                        <AiFillForward className="icon"></AiFillForward>
+                        Watch Later</button>
+                        {DropDownButton}
                 </div>
+                
             
             </div>
         </div> 

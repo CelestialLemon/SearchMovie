@@ -2,15 +2,17 @@ import axios from 'axios'
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-import { AiOutlineMinusCircle} from 'react-icons/ai'
+import { Popover, OverlayTrigger, Button } from 'react-bootstrap'
+import { AiOutlineMinusCircle, AiOutlineDelete, AiTwotoneDelete } from 'react-icons/ai'
 import { AiOutlineDownCircle, AiFillUpCircle } from 'react-icons/ai'
 import './List.css'
 
-const List = ({listName, color, data}) => {
+const List = ({data}) => {
 
-    color = 'linear-gradient(to right, '+ data.color1 +', '+ data.color2 +' )'
-
+    
+    const[isOpenModal, setIsOpenModal] = useState(false);
    const [isExpanded, setIsExpanded] = useState(false);
+   const [isDeleted, setIsDeleted] = useState(false);
 
     const expandContainer = () =>
     {
@@ -21,6 +23,8 @@ const List = ({listName, color, data}) => {
     {
             setIsExpanded(false);
     }
+
+    
 
     
     const FetchShowData = async (id) =>
@@ -37,17 +41,33 @@ const List = ({listName, color, data}) => {
         }
     }
 
+    const onConfirmDelete = async() =>
+    {
+        try
+        {
+
+            console.log("delete function called");
+            const res = await axios.post("http://localhost:4000/lists/deletelist", {"listName" : data.listName}, {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}})
+            console.log(res.data);
+            setIsDeleted(true);
+        }catch(err)
+        {
+            console.log(err)
+        }
+    }
+
     
    let ListContainerCSS = {
-     background : color
+     background : 'linear-gradient(to right, rgb(255, 69, 0), rgb(255, 165, 0))'
    };
     if(isExpanded === true)
     {
         ListContainerCSS = {
-            background : color,
+            background : 'linear-gradient(to right, rgb(255, 69, 0), rgb(255, 165, 0))',
             height : ((data.shows.length * 70) + 60) + "px"
         }
-        
+       
+
         if(data.shows.length === 0)
         {
             ListContainerCSS.height = "100px"
@@ -85,19 +105,43 @@ const List = ({listName, color, data}) => {
     useEffect(() =>
     {
         setShowsJSX();
-    }, [data])
+    }, [data]);
 
+    const popover = (
+        <Popover id="popover-basic">
+          <Popover.Title as="h3">Confirm Delete</Popover.Title>
+          <Popover.Content>
+            Are you sure you want to delete '{data.listName}' list?
+          </Popover.Content>
+          <Button style={{margin : "5px 5px 5px 5px"}} variant="danger" onClick={onConfirmDelete}>Delete</Button>
+        </Popover>
+      );
+
+    if(!isDeleted)
     return (
-        <div style={ListContainerCSS} className="ListContainer" onDoubleClick={expandContainer}>
-            <div className="listHeader">
-                <h3 className="listName">{listName}</h3>
-                {isExpanded ? 
-                <AiFillUpCircle className="arrow" onClick={collapseContainer}></AiFillUpCircle> : 
-                <AiOutlineDownCircle className="arrow" onClick={expandContainer}></AiOutlineDownCircle>}
+       
+        <div style={ListContainerCSS} className="ListContainer">
+           <div className="listHeader">
+                <h3 className="listName">{data.listName}</h3>
+                
+                {(data.listName !== "Currently Watching" && data.listName !== "Watch Later" && data.listName !== "On Pause") ?   
+                    <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose>
+                    <AiOutlineDelete className="delete" onClick={() => setIsOpenModal(true)}></AiOutlineDelete>
+                    </OverlayTrigger>
+                    
+                    : <h3 className="delete"></h3>}
+                    
+                    {isExpanded ? 
+                    <AiFillUpCircle className="arrow" onClick={collapseContainer}></AiFillUpCircle> : 
+                    <AiOutlineDownCircle className="arrow" onClick={expandContainer}></AiOutlineDownCircle>}
+                
             </div>
             {isExpanded ? showsJSXState : <></>}
         </div>
+           
     )
+    else
+    return null;
 }
 
 export default List

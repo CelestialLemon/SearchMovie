@@ -42,12 +42,17 @@ const Home = () => {
         }
 
         ValidateUser();
+
+    const onClickMyLists = () =>
+    {
+        history.push("/mylists");
+    }
        
 
     return (
         <div style={{backgroundColor : "black"}}>
             <div className="banner" style={bannerCss}>
-                <button className="mylists">My Lists</button>
+                <button className="mylists" onClick={onClickMyLists}>My Lists</button>
                 <div className="searchbar">
                 <Searchbar></Searchbar>
                 </div>
