@@ -77,6 +77,21 @@
   margin: 25px 20px 0 0;
 }
 
+.header .details .showStaus {
+  width: 500px;
+  color : white;
+  margin: 20px 10px 0px 0px;
+}
+
+
+.header .details .progress {
+  width: 500px;
+  margin: 20px 10px 0px 0px;
+}
+
+/* ----------------------------------------------------------------- */
+
+
 .button {
   display: inline-block;
   color: rgba(255, 255, 255, 0.9);
@@ -87,6 +102,9 @@
   border-radius: 50px;
 
 }
+
+/* ----------------------------------------------------------------- */
+
 .button.red {
   background: rgba(255, 69, 0, 0.288);
   border-width : 0px;
@@ -102,18 +120,21 @@
   background: rgba(255, 69, 0, 1)
 }
 
-.button.goldenrod {
-    background: rgba(255, 165, 0, 0.288);
-    border-width : 0px;
-    font-size: 20px;
-}
-
 .button.red .icon
 {
   transform: scale(1.5);
   margin-bottom: 7px;
   margin-right: 10px;
 }
+
+/* ----------------------------------------------------------------- */
+
+.button.goldenrod {
+    background: rgba(255, 165, 0, 0.288);
+    border-width : 0px;
+    font-size: 20px;
+}
+
 
 
 
@@ -128,12 +149,137 @@
     background: rgb(255, 165, 0, 1)
 }
 
+
+
 .button.goldenrod .icon 
 {
   transform: scale(1.5);
   margin-bottom: 7px;
   margin-right: 10px;
 }
+
+/* ----------------------------------------------------------------- */
+
+
+.button.pink {
+  background: rgba(91, 21, 48, 0.288);
+  border-width : 0px;
+  font-size: 20px;
+}
+
+.button.pink .icon
+{
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+.button.pink:hover {
+  background: rgba(91, 21, 48, 0.576);
+  transition: background-color 0.3s ease;
+}
+.button.pink:active {
+  background: rgba(91, 21, 48, 1);
+}
+
+
+/* ----------------------------------------------------------------- */
+
+
+
+.button.drop {
+  background: rgba(255, 0, 60, 0.288);
+  border-width : 0px;
+  font-size: 20px;
+}
+
+.button.drop .icon
+{
+  transform: scale(1.25);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+.button.drop:hover {
+  background: rgba(255, 0, 60, 0.576);
+  transition: background-color 0.3s ease;
+}
+.button.drop:active {
+  background: rgba(255, 0, 60, 1);
+}
+
+
+
+/* ----------------------------------------------------------------- */
+
+
+.button.continue {
+  background: rgba(4, 222, 0, 0.288);
+  border-width : 0px;
+  font-size: 20px;
+}
+
+.button.continue .icon
+{
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+.button.continue:hover {
+  background: rgba(4, 222, 0, 0.576);
+  transition: background-color 0.3s ease;
+}
+.button.continue:active {
+  background: rgba(4, 222, 0, 1);
+}
+
+/* ----------------------------------------------------------------- */
+.button.completed {
+  background: rgba(4, 222, 0, 0.288);
+  border-width : 0px;
+  font-size: 20px;
+}
+
+.button.completed .icon
+{
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+.button.completed:hover {
+  background: rgba(4, 222, 0, 0.576);
+  transition: background-color 0.3s ease;
+}
+.button.completed:active {
+  background: rgba(4, 222, 0, 1);
+}
+/* ----------------------------------------------------------------- */
+
+.button.pause {
+  background: rgba(255,255,0, 0.288);
+  border-width : 0px;
+  font-size: 20px;
+}
+
+.button.pause .icon
+{
+  transform: scale(1.5);
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+
+.button.pause:hover {
+  background: rgba(255,255,0, 0.576);
+  transition: background-color 0.3s ease;
+}
+.button.pause:active {
+  background: rgba(255,255,0, 1);
+}
+
+/* ----------------------------------------------------------------- */
+
   
 .button.blue 
 {
@@ -163,6 +309,7 @@
   margin-right: 10px;
 }
 
+/* ----------------------------------------------------------------- */
 #dropdown-basic:focus
 {
   outline : none;

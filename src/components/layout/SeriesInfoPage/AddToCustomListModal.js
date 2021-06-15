@@ -6,7 +6,7 @@ import { RiAddFill } from 'react-icons/ri';
 
 
 let temp =[];
-const AddToCustomListModal = ({listsData}) => {
+const AddToCustomListModal = ({listsData, AddToCustomList}) => {
 
     const [modalShow, setModalShow] = React.useState(false);
     const [checkboxesState, setCheckboxesState] = useState([]);
@@ -18,7 +18,7 @@ const AddToCustomListModal = ({listsData}) => {
    const InitializeCheckboxStates = () =>
    {
        temp = [];
-       for(var i=3; i<listsData.length; i++)
+       for(var i=4; i<listsData.length; i++)
        {
             temp.push({
               "listName" : listsData[i].listName,
@@ -38,6 +38,7 @@ const AddToCustomListModal = ({listsData}) => {
        console.log(checkboxesState);
        setModalShow(false);
        InitializeCheckboxStates();
+       AddToCustomList(checkboxesState);
        // setModalShow(false);
    }
 
@@ -51,14 +52,14 @@ const AddToCustomListModal = ({listsData}) => {
     const SetCustomListsCheckboxes = async () =>
     {
         const tempVar = [];  
-        for(var i=3; i<listsData.length; i++) //label has + i to every child can have unique id and function properly
+        for(var i=4; i<listsData.length; i++) //label has + i to every child can have unique id and function properly
         {
 
             const id = i;
             tempVar.push(
                 <Form.Group key={id} controlId={"listNumber" + id.toString()}>
                     <Form.Check type="checkbox" label={listsData[i].listName}  onChange={e => {
-                       temp[id-3].checked = e.target.checked;
+                       temp[id-4].checked = e.target.checked;
                     }}/>
                 </Form.Group>
             )
@@ -94,7 +95,7 @@ const AddToCustomListModal = ({listsData}) => {
             <Modal.Footer>
               <Button variant="success" onClick={onConfirmClick}>
                   Confirm</Button>
-              <Button onClick={props.onHide}>Close</Button>
+              <Button onClick={props.onHide}>Cancel</Button>
             </Modal.Footer>
           </Modal>
         );

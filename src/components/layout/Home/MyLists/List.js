@@ -7,9 +7,8 @@ import { AiOutlineMinusCircle, AiOutlineDelete, AiTwotoneDelete } from 'react-ic
 import { AiOutlineDownCircle, AiFillUpCircle } from 'react-icons/ai'
 import './List.css'
 
-const List = ({data}) => {
+const List = ({data, reload}) => {
 
-    
     const[isOpenModal, setIsOpenModal] = useState(false);
    const [isExpanded, setIsExpanded] = useState(false);
    const [isDeleted, setIsDeleted] = useState(false);
@@ -32,12 +31,37 @@ const List = ({data}) => {
         try
         {
             const res = await axios.get('https://api.themoviedb.org/3/tv/' + id + '?api_key=06353fd3792f2599dd5cb140df26c423');
-            console.log('feteched data');
             return res.data;
         }catch(err)
         {
             console.log(err);
             return null;
+        }
+    }
+
+    const onShowDelete = async (id, indexToDelete) =>
+    {
+        console.log("deleting show : " + id + " from listname " + data.listName);
+        try
+        {
+            const res = await axios.post("http://localhost:4000/lists/deleteshowfromlist", 
+            {
+                'listName' : data.listName,
+                'showId' : id.toString()
+            },
+            {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}}
+            )
+
+            console.log(res.data);
+            console.log(showsJSXState);
+            const newList = showsJSXState.filter((show, index) => index !== indexToDelete);
+            
+            setShowsJSXState(newList);
+            reload();
+            
+        }catch(err)
+        {
+            console.log(err);
         }
     }
 
@@ -83,12 +107,12 @@ const List = ({data}) => {
     {
            for(var i=0; i<data.shows.length; i++)
             {
+                const index = i;
                 const showData = await FetchShowData(data.shows[i].showId);
-                console.log(showData);
                 showsJSX.push(
                     <div key={showData.id} className="show">
                          <h3 className="name">{String("0" + (i + 1)).slice(-2) + ". " +showData.name}</h3>
-                         <AiOutlineMinusCircle className="delete" onClick={(e) => console.log(e)}></AiOutlineMinusCircle>
+                         <AiOutlineMinusCircle className="delete" onClick={(e) => onShowDelete(showData.id, index)}></AiOutlineMinusCircle>
                     </div>
                 )
             }
@@ -99,7 +123,6 @@ const List = ({data}) => {
             }
 
             setShowsJSXState(showsJSX);
-    
     }
 
     useEffect(() =>
@@ -124,7 +147,7 @@ const List = ({data}) => {
            <div className="listHeader">
                 <h3 className="listName">{data.listName}</h3>
                 
-                {(data.listName !== "Currently Watching" && data.listName !== "Watch Later" && data.listName !== "On Pause") ?   
+                {(data.listName !== "Currently Watching" && data.listName !== "Watch Later" && data.listName !== "On Pause" && data.listName !== "Completed") ?   
                     <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose>
                     <AiOutlineDelete className="delete" onClick={() => setIsOpenModal(true)}></AiOutlineDelete>
                     </OverlayTrigger>

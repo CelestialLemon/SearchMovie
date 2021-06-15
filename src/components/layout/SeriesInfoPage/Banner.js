@@ -8,11 +8,13 @@ import AddToCustomListModal from './AddToCustomListModal'
 import { useState, useEffect } from 'react'
 
 import './SeriesInfoPage.css';
-import { Button, Dropdown, Form, Modal } from 'react-bootstrap'
-import { AiFillPlayCircle, AiFillForward, AiOutlineSave } from 'react-icons/ai';
+import { Button, Dropdown, Form, Modal, ProgressBar } from 'react-bootstrap'
+import { AiFillPlayCircle, AiFillForward, AiOutlineSave, AiFillPauseCircle } from 'react-icons/ai';
+import { FaBan } from 'react-icons/fa'
 import { RiAddFill } from 'react-icons/ri';
+import { MdDone, MdWatchLater } from 'react-icons/md'
 
-const Banner = ({data}) => {
+const Banner = ({data, id, showStatus}) => {
 
     let bannerCss;   //css for banner , written external instead of inline to make code look cleaner    
 
@@ -45,6 +47,28 @@ const Banner = ({data}) => {
         }
     }
 
+    const AddToCustomList = async (customLists) =>
+    {
+        try
+        {
+            for(var i=0; i<customLists.length; i++)
+            {
+                if(customLists[i].checked === true)
+                {
+                    const res = await axios.post("http://localhost:4000/lists/addshowtolist", {
+                    "listName" : customLists[i].listName,
+                    "showId" : id
+                }, {headers : { 'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}
+                })
+                console.log("added "+ id + "to "  + customLists[i].listName)
+                }
+            }
+        }catch(err)
+        {
+            console.log(err);
+        }
+    }
+
     
 
       //stores states of checkboxes temporarily and later is stored in state checkboxesState
@@ -56,8 +80,98 @@ const Banner = ({data}) => {
     
    
     const DropDownButton = listsData ? (
-        <AddToCustomListModal listsData={listsData}></AddToCustomListModal>
+        <AddToCustomListModal listsData={listsData} AddToCustomList={AddToCustomList}></AddToCustomListModal>
         ) : <></>
+
+    let ProgressBarVariant;
+    let ButtonsJSX = (
+        <></>
+    )
+
+    if(showStatus == "")
+    {
+        ButtonsJSX = (
+            <div>
+                <button className="button red">
+                            <AiFillPlayCircle className="icon"></AiFillPlayCircle>
+                            Start Watching
+                </button>
+                <button className="button goldenrod" >
+                            <MdWatchLater className="icon"></MdWatchLater>
+                            Watch Later
+                </button>
+            </div>
+        )
+    }
+
+    else if(showStatus == "Currently Watching")
+    {
+        ProgressBarVariant = '';
+        ButtonsJSX = (
+            <div>
+                <button className="button pause">
+                            <AiFillPauseCircle className="icon"></AiFillPauseCircle>
+                            Put on Pause
+                </button>
+                <button className="button completed" >
+                            <MdDone className="icon"></MdDone>
+                            Completed
+                </button>
+               
+            </div>
+        )
+    }
+
+    else if(showStatus == "On Pause")
+    {
+        ProgressBarVariant = 'warning';
+        ButtonsJSX = (
+            <div>
+                <button className="button continue">
+                            <AiFillPlayCircle className="icon"></AiFillPlayCircle>
+                            Continue
+                </button>
+                <button className="button drop" style={{color : "red"}}>
+                            <FaBan className="icon"></FaBan>
+                            Drop
+                </button>
+            </div>
+        )
+    }
+
+    else if(showStatus == "Watch Later")
+    {
+        ButtonsJSX = (
+            <div>
+                <button className="button red">
+                            <AiFillPlayCircle className="icon"></AiFillPlayCircle>
+                            Start Watching
+                </button>
+                <button className="button goldenrod" style={{color : "rgba(0, 232, 50)"}}>
+                            <MdDone className="icon"></MdDone>
+                            Watch Later
+                </button>
+            </div>
+        )
+    }
+
+    else if(showStatus == "Completed")
+    {
+        ProgressBarVariant = 'success';
+        ButtonsJSX = (
+            <div>
+                <button className="button completed"  style={{color : "rgba(0, 232, 50)"}}>
+                            <MdDone className="icon"></MdDone>
+                            Completed
+                </button>
+                
+            </div>
+        )
+    }
+
+    
+
+    
 
 
     useEffect(() =>
@@ -81,14 +195,14 @@ const Banner = ({data}) => {
                 <Genres data={data}></Genres>
                 
                 <div style={{display:"flex"}}>
-                    <button className="button red">
-                        <AiFillPlayCircle className="icon"></AiFillPlayCircle>
-                        Currently Watching</button>
-                    <button className="button goldenrod" >
-                        <AiFillForward className="icon"></AiFillForward>
-                        Watch Later</button>
+                        {ButtonsJSX}
                         {DropDownButton}
                 </div>
+                
+                {showStatus != '' && showStatus != 'Watch Later' ? 
+                 <ProgressBar animated variant={ProgressBarVariant} now={40}/>
+                : <></>}  
+                
                 
             
             </div>

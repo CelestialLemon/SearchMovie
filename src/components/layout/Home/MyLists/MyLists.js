@@ -27,6 +27,13 @@ const MyLists = () => {
         }
     } 
 
+    const reload = () =>
+    {
+        console.log('reload funciton called')
+        setDataChanged(dataChanged + 1);
+    }
+
+
     let listsJSX = [];
 
     if(listData)
@@ -34,7 +41,7 @@ const MyLists = () => {
         for(var i=0; i< listData.length; i++)
         {
             listsJSX.push(
-                <List key={listData[i].listName} data={listData[i]}></List>
+                <List key={listData[i].listName} data={listData[i]} reload={reload}></List>
             )
         }
 
@@ -45,6 +52,7 @@ const MyLists = () => {
         setDataChanged(dataChanged + 1);  //change a useless state to reload page
     }
 
+    
     const onBackToHomeClick = () =>
     {
         history.push("/");

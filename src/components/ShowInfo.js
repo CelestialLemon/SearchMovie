@@ -17,6 +17,7 @@ const ShowInfo = () => {
     const { id } = useParams();      //tmdb id of the tv show to be displayed
 
     const [data, setData] = useState(null); //state used for data to be displayed on the page
+    const [showStatus, setShowStatus] = useState('');
    
     const FetchData = async () =>
     {
@@ -43,6 +44,23 @@ const ShowInfo = () => {
         }
     }
 
+    const FetchShowStatus = async () =>
+    {
+        try
+        {
+            const res = await axios.post('http://localhost:4000/shows/showstatus', 
+            {'id' : id},
+            {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}}
+            )
+
+            console.log(res.data);
+            setShowStatus(res.data.listName);
+        }catch(err)
+        {
+            console.log(err);
+        }
+    }
+
     const [activeTab, setActiveTab] = useState('SeasonsTab');
 
     const onTabChange = (tabName) =>
@@ -54,6 +72,7 @@ const ShowInfo = () => {
     useEffect(() =>
     {
         FetchData();
+        FetchShowStatus();
         setActiveTab('SeasonsTab')
     }, [id])     //avoid the cycle of fetching data every time the page is re-rendered
    
@@ -61,7 +80,7 @@ const ShowInfo = () => {
     if(data)//renderes page after data is fetched
     return (
         (<div style={{backgroundColor: "black", paddingBottom:"50px"}}>
-        <Banner data={data}></Banner>
+        <Banner data={data} id={id} showStatus={showStatus}></Banner>
         
         <div>
             <Navbar currentActiveTab={activeTab} onTabChange={onTabChange}></Navbar>
