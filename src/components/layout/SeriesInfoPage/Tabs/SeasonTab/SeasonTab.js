@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 
 import './SeasonTab.css'
 
-const SeasonTab = ({ id, data }) => {
+const SeasonTab = ({ id, data, seasonsCompleted }) => {
 
     const [currentSeason, setCurrentSeason] = useState('All Seasons');
     
@@ -27,19 +27,19 @@ const SeasonTab = ({ id, data }) => {
         let tempVar;
         for(var i=1; i<=data.numOfSeasons; i++)
         {
-            tempVar = (<SeasonInfoCard id={id} seasonNumber={i}></SeasonInfoCard>)
+            tempVar = (<SeasonInfoCard id={id} totalNumOfSeasons={data.numOfSeasons} seasonNumber={i} seasonsCompleted={seasonsCompleted}></SeasonInfoCard>)
             someRandomVariable.push(tempVar);
         }
     }
     else
     {
-        someRandomVariable = (<SeasonInfoCard id={id} seasonNumber={currentSeason.split(" ")[1]}></SeasonInfoCard>)
+        someRandomVariable = (<SeasonInfoCard id={id} totalNumOfSeasons={data.numOfSeasons} seasonNumber={currentSeason.split(" ")[1]} seasonsCompleted={seasonsCompleted}></SeasonInfoCard>)
     }
     
 
     
     
-    // console.log(SeasonCards)
+    
 
    
     

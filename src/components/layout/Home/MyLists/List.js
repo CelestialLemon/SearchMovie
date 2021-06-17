@@ -44,7 +44,7 @@ const List = ({data, reload}) => {
         console.log("deleting show : " + id + " from listname " + data.listName);
         try
         {
-            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist", 
+            const res = await axios.post("http://localhost:4000/lists/deleteshowfromlist", 
             {
                 'listName' : data.listName,
                 'showId' : id.toString()
@@ -71,7 +71,7 @@ const List = ({data, reload}) => {
         {
 
             console.log("delete function called");
-            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/deletelist", {"listName" : data.listName}, {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}})
+            const res = await axios.post("http://localhost:4000/lists/deletelist", {"listName" : data.listName}, {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}})
             console.log(res.data);
             setIsDeleted(true);
         }catch(err)

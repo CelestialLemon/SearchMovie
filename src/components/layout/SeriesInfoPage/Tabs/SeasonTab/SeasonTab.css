@@ -1,59 +1,90 @@
-.seasonContainer
+.season-card-container
 {
-    max-width: 1880px;
-    min-height: 300px;
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin : 30px 50px 30px 50px;
+    width: 90vw;
+    height: 30vh;
     display: flex;
     border-radius: 10px;
-    border-width: 5px;
-    border-color: white;
-    transition : transform 0.2s;
 }
 
-.poster
+.season-card-container .poster
 {
-    max-height: 300px;
     border-radius: 10px;
+    height: 100%;
+    width: auto;
 }
 
-.seasonContainer .details
+.season-card-container .details .header
 {
-   margin-left: 3%;
-   margin-top: 2%;
-   min-width: 50%;
+    display: flex;
+    width: 80vw;
 }
 
-.seasonContainer .details .title
+.season-card-container .details .header .title
 {
+    margin : 30px 10px 0px 30px;
     font-size: 40px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   
-      
 }
 
-
-.seasonContainer .overview
+.season-card-container .details .header .mark-as-complete
 {
+    margin : 30px 30px 0px auto;
+    padding : 5px 15px 5px 10px;
+    border-width: 0px;
     font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    min-height: 45%;
-    padding-right: 2%;
-}
-
-.seasonContainer .details .numofepisodes
-{
-    font-size: 20px;
-    margin-right: 2%;
-    display: inline-block;
     border-radius: 50px;
-    padding-right: 20px;
-    padding-left: 20px;
+    font-weight: 500;
+    transition: color 250ms ease;
+    transition : background-color 250ms ease;
+}
+
+
+.season-card-container .details .header .mark-as-complete .icon
+{
+   transform: scale(1.25);
+   margin : 0px 10px 5px 5px;
+}
+
+.season-card-container .details .header .complete
+{
+    margin : 30px 30px 0px auto;
+    padding : 5px 15px 5px 10px;
+    border-width: 0px;
+    font-size: 20px;
+    color: white;
+    background-color: green;
+    border-radius: 50px;
+    font-weight: 500;
+   
+}
+
+.season-card-container .details .header .complete .icon
+{
+   transform: scale(1.25);
+   margin : 0px 10px 5px 5px;
+}
+
+
+
+.season-card-container .details .overview
+{
+    margin : 30px 10px 0px 30px;
+    max-width: 80%;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 200;
+}
+
+.season-card-container .details .numofepisodes
+{
+   font-size: 20px;
+   margin : 30px 0px 0px 30px;
+   padding: 5px 12px;
+   border: 1px solid;
+   border-radius: 50px;
 }
 
 .seasonSelect
 {
-    margin-top : 2%;
-    padding-left: 8%;
+    margin : 30px 10px 0px 30px;
 }

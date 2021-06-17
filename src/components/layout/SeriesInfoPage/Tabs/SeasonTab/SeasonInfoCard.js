@@ -4,10 +4,9 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import analyze from 'rgbaster'
 
+import { MdDone } from 'react-icons/md'
 
-
-
-const SeasonInfoCard = ({ id, seasonNumber }) => {
+const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted}) => {
     
     const [seasonData, setSeasonData] = useState(null);
     const [backgroundColor, setBackgroundColor] = useState(null);
@@ -63,7 +62,7 @@ const SeasonInfoCard = ({ id, seasonNumber }) => {
 
 
 
-
+        
             
         }catch(err)
         {
@@ -74,37 +73,122 @@ const SeasonInfoCard = ({ id, seasonNumber }) => {
     if(seasonData){
         setColors();
     }
-    
+
+    const [markAsDoneCSS, setMarkAsDoneCSS] = useState(null);
+
+    const onMarkAsDoneHover = () =>
+    {
+        setMarkAsDoneCSS({
+            backgroundColor : foregroundColor,
+            color : backgroundColor
+        })
+    }
+
+    const onMarkAsDoneMouseExit = () =>
+    {
+        setMarkAsDoneCSS({
+            backgroundColor : backgroundColor,
+            color : foregroundColor
+        })
+    }
+
+    const onClickMarkAsComplete = async () =>
+    {
+        try
+        {
+            const res = await axios.post('http://localhost:4000/shows/showstatus',
+            {
+                "showId" : id.toString()
+            },
+            {
+                headers : {
+                    'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                }
+            });
+
+            console.log({
+                "listName" : res.data.listName,
+                "showId" : id.toString(),
+                "seasonsCompleted" : seasonNumber,
+                "progress" : seasonNumber * 100 / totalNumOfSeasons
+            })
+            
+            const res2 = await axios.post('http://localhost:4000/shows/updateprogress',
+            {
+                "listName" : res.data.listName,
+                "showId" : id.toString(),
+                "seasonsCompleted" : seasonNumber,
+                "progress" : seasonNumber * 100 / totalNumOfSeasons
+            },
+            {
+                headers : {
+                    'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                }
+            });
+
+            console.log(res2.data);
+        }catch(err)
+        {
+            console.log(err);
+        }
+    }
 
     useEffect(() =>
     {
         FetchSeasonsData();
     }, [id, seasonNumber])
 
-
+    useEffect(() =>
+    {
+        setMarkAsDoneCSS({
+            backgroundColor : backgroundColor,
+            color : foregroundColor
+        })
+    }, [backgroundColor, foregroundColor])
  
     
 
     if(seasonData)
+    {
+        const arr = seasonData.air_date.split('-');
+        const date = arr[2];
+        const year = arr[0];
+        const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
+        const month = formatter.format(new Date(0, arr[1] - 1, 0));
+
+        const airDate = date + " " + month + " " + year;
+;
     return (
-            <div>
-            <div className="seasonContainer" style={{backgroundColor : backgroundColor, color : foregroundColor}}>
-            <img className="poster" src={seasonData.poster}></img>
-            <div className="details">
-                <h3 className="title">{seasonData.seasonName}</h3>
-                <br></br>
-                <h3 className="overview" style={{backgroundColor : backgroundColor, color : foregroundColor}}>{seasonData.overview}</h3>
-                
-                <div style={{display: "flex"}}>
-                    <button style={{backgroundColor : backgroundColor, color : foregroundColor}} className="numofepisodes btn btn-outline-secondary">{seasonData.air_date}</button>
-                    <button style={{backgroundColor : backgroundColor, color : foregroundColor}} className="numofepisodes btn btn-outline-secondary">{seasonData.numOfEpisodes + " Episodes"}</button>
+            <div className="season-card-container" style={{backgroundColor : backgroundColor, color : foregroundColor}}>
+                <img className="poster" src={seasonData.poster}></img>
+                <div className="details">
+                    <div className="header">
+                        <h3 className="title">{seasonData.seasonName}</h3>
+                        { seasonNumber <= seasonsCompleted ?
+                        
+                        <button className="complete" onClick={onClickMarkAsComplete}
+                        onMouseEnter={onMarkAsDoneHover} onMouseLeave={onMarkAsDoneMouseExit} disabled>
+                          <MdDone className="icon"></MdDone>
+                           Completed</button>:
+                        
+                        <button className="mark-as-complete" style={markAsDoneCSS} onClick={onClickMarkAsComplete}
+                         onMouseEnter={onMarkAsDoneHover} onMouseLeave={onMarkAsDoneMouseExit}>
+                            <MdDone className="icon"></MdDone>
+                            Mark as Complete</button>}
+                    </div>
+                    <div >
+                        <h3 className="overview">{seasonData.overview}</h3>
+                    </div>
+                    <div style={{display: "flex"}}>
+                     <div style={{display: "flex"}}>
+                    <div style={{backgroundColor : backgroundColor, color : foregroundColor}} className="numofepisodes">{airDate}</div>
+                    <div style={{backgroundColor : backgroundColor, color : foregroundColor}} className="numofepisodes">{seasonData.numOfEpisodes + " Episodes"}</div>
+                </div>
+                   </div>
                 </div>
             </div>
-            
-        </div>
-        </div>
-        
-    )
+    )   
+    }
     else
     return(
         <h2>loading</h2>

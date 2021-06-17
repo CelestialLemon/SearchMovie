@@ -23,6 +23,7 @@ const ShowInfo = () => {
     const [data, setData] = useState(null); //state used for data to be displayed on the page
     const [showStatus, setShowStatus] = useState('');
     const [showProgress, setShowProgress] = useState(0);
+    const [showSeasonsCompleted, setShowSeasonsCompleted] = useState(0);
    
 
     const ValidateUser = async () =>
@@ -69,7 +70,7 @@ const ShowInfo = () => {
     {
         try
         {
-            const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/showstatus', 
+            const res = await axios.post('http://localhost:4000/shows/showstatus', 
             {
                 "showId" : id.toString()},
             {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}}
@@ -78,6 +79,7 @@ const ShowInfo = () => {
             console.log(res.data);
             setShowStatus(res.data.listName);
             setShowProgress(res.data.progress);
+            setShowSeasonsCompleted(res.data.seasonsCompleted);
         }catch(err)
         {
             console.log(err);
@@ -110,7 +112,7 @@ const ShowInfo = () => {
         </div>
         
         <div>
-            {activeTab == "SeasonsTab" ? <SeasonTab id={id} data={data}></SeasonTab> : <></>}
+            {activeTab == "SeasonsTab" ? <SeasonTab id={id} data={data} seasonsCompleted={showSeasonsCompleted}></SeasonTab> : <></>}
             {activeTab == "CastTab" ? <CastTab id={id}></CastTab> : <></>}
             {activeTab == "ImagesTab" ? <ImagesTab id={id}></ImagesTab> : <></>}
             {activeTab == "RecommendedTab" ? <RecommendedTab id={id}></RecommendedTab> : <></>}
