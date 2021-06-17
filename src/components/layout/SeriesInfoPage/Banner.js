@@ -7,6 +7,8 @@ import SeriesDetails from './SeriesDetails'
 import AddToCustomListModal from './AddToCustomListModal'
 import { useState, useEffect } from 'react'
 
+import { onStartWatchingClick, onPutOnPauseClick, onMarkAsCompleteClick, onContinueWatchingClick, onAddToWatchLaterClick, onDropClick } from './ButtonClickFunctions'
+
 import './SeriesInfoPage.css';
 import { Button, Dropdown, Form, Modal, ProgressBar } from 'react-bootstrap'
 import { AiFillPlayCircle, AiFillForward, AiOutlineSave, AiFillPauseCircle } from 'react-icons/ai';
@@ -14,9 +16,10 @@ import { FaBan } from 'react-icons/fa'
 import { RiAddFill } from 'react-icons/ri';
 import { MdDone, MdWatchLater } from 'react-icons/md'
 
-const Banner = ({data, id, showStatus}) => {
+const Banner = ({data, id, showStatus, showProgress}) => {
 
     let bannerCss;   //css for banner , written external instead of inline to make code look cleaner    
+    const [st, setSt] = useState(showStatus);
 
     if(data)        //after data is fetched css is set to avoid error at data.backdrop
     {
@@ -39,7 +42,7 @@ const Banner = ({data, id, showStatus}) => {
     {
         try
         {
-            const res = await axios.get('http://localhost:4000/lists/userlists', {headers : {'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}});
+            const res = await axios.get('https://api-search-a-movie-22.herokuapp.com/lists/userlists', {headers : {'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}});
             setListsData(res.data);
         }catch(err)
         {
@@ -55,9 +58,10 @@ const Banner = ({data, id, showStatus}) => {
             {
                 if(customLists[i].checked === true)
                 {
-                    const res = await axios.post("http://localhost:4000/lists/addshowtolist", {
+                    const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist", {
                     "listName" : customLists[i].listName,
-                    "showId" : id
+                    "showId" : id,
+                    "progress" : 0
                 }, {headers : { 'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}
                 })
                 console.log("added "+ id + "to "  + customLists[i].listName)
@@ -88,15 +92,15 @@ const Banner = ({data, id, showStatus}) => {
         <></>
     )
 
-    if(showStatus == "")
+    if(st == "")
     {
         ButtonsJSX = (
             <div>
-                <button className="button red">
+                <button className="button red" onClick={() => {onStartWatchingClick(id); setSt("Currently Watching")}}>
                             <AiFillPlayCircle className="icon"></AiFillPlayCircle>
                             Start Watching
                 </button>
-                <button className="button goldenrod" >
+                <button className="button goldenrod" onClick={() => {onAddToWatchLaterClick(id); setSt("Watch Later")}}>
                             <MdWatchLater className="icon"></MdWatchLater>
                             Watch Later
                 </button>
@@ -104,16 +108,16 @@ const Banner = ({data, id, showStatus}) => {
         )
     }
 
-    else if(showStatus == "Currently Watching")
+    else if(st == "Currently Watching")
     {
         ProgressBarVariant = '';
         ButtonsJSX = (
             <div>
-                <button className="button pause">
+                <button className="button pause" onClick={() => {onPutOnPauseClick(id) ; setSt("On Pause")}}>
                             <AiFillPauseCircle className="icon"></AiFillPauseCircle>
                             Put on Pause
                 </button>
-                <button className="button completed" >
+                <button className="button completed" onClick={() => {onMarkAsCompleteClick(id); setSt("Completed")}}>
                             <MdDone className="icon"></MdDone>
                             Completed
                 </button>
@@ -122,16 +126,16 @@ const Banner = ({data, id, showStatus}) => {
         )
     }
 
-    else if(showStatus == "On Pause")
+    else if(st == "On Pause")
     {
         ProgressBarVariant = 'warning';
         ButtonsJSX = (
             <div>
-                <button className="button continue">
+                <button className="button continue" onClick={() => {onContinueWatchingClick(id); setSt("Currently Watching")}}>
                             <AiFillPlayCircle className="icon"></AiFillPlayCircle>
                             Continue
                 </button>
-                <button className="button drop" style={{color : "red"}}>
+                <button className="button drop" style={{color : "red"}} onClick={() => {onDropClick(id) ; setSt("")}}>
                             <FaBan className="icon"></FaBan>
                             Drop
                 </button>
@@ -139,11 +143,11 @@ const Banner = ({data, id, showStatus}) => {
         )
     }
 
-    else if(showStatus == "Watch Later")
+    else if(st == "Watch Later")
     {
         ButtonsJSX = (
             <div>
-                <button className="button red">
+                <button className="button red" onClick={() => {onStartWatchingClick(id); setSt("Currently Watching")}}>
                             <AiFillPlayCircle className="icon"></AiFillPlayCircle>
                             Start Watching
                 </button>
@@ -155,7 +159,7 @@ const Banner = ({data, id, showStatus}) => {
         )
     }
 
-    else if(showStatus == "Completed")
+    else if(st == "Completed")
     {
         ProgressBarVariant = 'success';
         ButtonsJSX = (
@@ -179,7 +183,10 @@ const Banner = ({data, id, showStatus}) => {
         FetchListsData();
     }, []);
 
-   
+   useEffect(() =>
+   {
+       setSt(showStatus);
+   }, [showStatus])
 
     return (
         <div>
@@ -199,8 +206,12 @@ const Banner = ({data, id, showStatus}) => {
                         {DropDownButton}
                 </div>
                 
-                {showStatus != '' && showStatus != 'Watch Later' ? 
-                 <ProgressBar animated variant={ProgressBarVariant} now={40}/>
+                {st != '' && st != 'Watch Later' && st != 'Completed'? 
+                 <ProgressBar animated variant={ProgressBarVariant} now={showProgress}/>
+                : <></>}
+
+                {st == 'Completed'? 
+                 <ProgressBar animated variant={ProgressBarVariant} now={100}/>
                 : <></>}  
                 
                 

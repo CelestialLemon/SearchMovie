@@ -44,7 +44,7 @@ const List = ({data, reload}) => {
         console.log("deleting show : " + id + " from listname " + data.listName);
         try
         {
-            const res = await axios.post("http://localhost:4000/lists/deleteshowfromlist", 
+            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist", 
             {
                 'listName' : data.listName,
                 'showId' : id.toString()
@@ -71,7 +71,7 @@ const List = ({data, reload}) => {
         {
 
             console.log("delete function called");
-            const res = await axios.post("http://localhost:4000/lists/deletelist", {"listName" : data.listName}, {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}})
+            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/deletelist", {"listName" : data.listName}, {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}})
             console.log(res.data);
             setIsDeleted(true);
         }catch(err)
@@ -147,12 +147,18 @@ const List = ({data, reload}) => {
            <div className="listHeader">
                 <h3 className="listName">{data.listName}</h3>
                 
-                {(data.listName !== "Currently Watching" && data.listName !== "Watch Later" && data.listName !== "On Pause" && data.listName !== "Completed") ?   
+                {(data.listName !== "Currently Watching" && 
+                    data.listName !== "Watch Later" && 
+                    data.listName !== "On Pause" && 
+                    data.listName !== "Completed") ?
+
                     <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose>
                     <AiOutlineDelete className="delete" onClick={() => setIsOpenModal(true)}></AiOutlineDelete>
                     </OverlayTrigger>
                     
-                    : <h3 className="delete"></h3>}
+                    : 
+                    <h3 className="delete"></h3>
+                }
                     
                     {isExpanded ? 
                     <AiFillUpCircle className="arrow" onClick={collapseContainer}></AiFillUpCircle> : 

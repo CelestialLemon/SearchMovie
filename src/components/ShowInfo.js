@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaPlus } from 'react-icons/fa'   //icon for + sign in + Add to Watchlist button
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom' 
+import { useParams, useHistory } from 'react-router-dom' 
 import '../bootstrap/bootstrap-5.0.1-dist/css/bootstrap.min.css'
 import axios from 'axios'
 
@@ -13,12 +13,33 @@ import CastTab from './layout/SeriesInfoPage/Tabs/CastTab/CastTab'
 import ImagesTab from './layout/SeriesInfoPage/Tabs/ImagesTab/ImagesTab'
 import RecommendedTab from './layout/SeriesInfoPage/Tabs/RecommendedTab/RecommendedTab'
 
+import ValidateLocalToken from '../functions/ValidateLocalToken'
+import ValidateSessionToken from '../functions/ValidateSessionToken'
+
+
 const ShowInfo = () => {
     const { id } = useParams();      //tmdb id of the tv show to be displayed
-
+    let history = useHistory();
     const [data, setData] = useState(null); //state used for data to be displayed on the page
     const [showStatus, setShowStatus] = useState('');
+    const [showProgress, setShowProgress] = useState(0);
    
+
+    const ValidateUser = async () =>
+        {
+            const res = await ValidateLocalToken();
+            if(res === false)
+            {
+                const sessionRes = await ValidateSessionToken();
+                if(sessionRes === false)
+                {
+                    history.push("/login");
+                }
+
+            }
+        }
+
+        ValidateUser();
     const FetchData = async () =>
     {
         try
@@ -48,13 +69,15 @@ const ShowInfo = () => {
     {
         try
         {
-            const res = await axios.post('http://localhost:4000/shows/showstatus', 
-            {'id' : id},
+            const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/showstatus', 
+            {
+                "showId" : id.toString()},
             {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}}
             )
 
             console.log(res.data);
             setShowStatus(res.data.listName);
+            setShowProgress(res.data.progress);
         }catch(err)
         {
             console.log(err);
@@ -80,7 +103,7 @@ const ShowInfo = () => {
     if(data)//renderes page after data is fetched
     return (
         (<div style={{backgroundColor: "black", paddingBottom:"50px"}}>
-        <Banner data={data} id={id} showStatus={showStatus}></Banner>
+        <Banner data={data} id={id} showStatus={showStatus} showProgress={showProgress}></Banner>
         
         <div>
             <Navbar currentActiveTab={activeTab} onTabChange={onTabChange}></Navbar>

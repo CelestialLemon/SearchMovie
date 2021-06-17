@@ -52,7 +52,7 @@ const AddNewList = ({onNewListAdded}) => {
             const data = {
                 "listName" : listName
             }
-            const res = await axios.post("http://localhost:4000/lists/addlist", data, {headers : {'authorization' : 'Bearer ' + token}})
+            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/addlist", data, {headers : {'authorization' : 'Bearer ' + token}})
            
             if(res.data.msg === "list already exists")
             {
