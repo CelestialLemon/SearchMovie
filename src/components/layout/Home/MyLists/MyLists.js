@@ -33,6 +33,7 @@ const MyLists = () => {
     const reload = () =>
     {
         console.log('reload funciton called')
+        setDataChanged(dataChanged + 1)
         setListsJSX();
     }
 

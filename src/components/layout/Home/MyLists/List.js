@@ -82,7 +82,7 @@ const List = ({data, reload}) => {
             console.log(newList);
             setShowsJSXState(newList);
             setShowsJSX();
-            
+            reload();
             
         }catch(err)
         {
@@ -132,11 +132,7 @@ const List = ({data, reload}) => {
         setShowsJSX();
     }, [data]);
 
-    useEffect(() =>
-    {
-        reload();
-    }, [showsJSXState])
-
+    
     const popover = (
         <Popover id="popover-basic">
           <Popover.Title as="h3">Confirm Delete</Popover.Title>
