@@ -33,22 +33,29 @@ const MyLists = () => {
     const reload = () =>
     {
         console.log('reload funciton called')
-        setDataChanged(dataChanged + 1);
+        setListsJSX();
     }
 
 
     let listsJSX = [];
-
-    if(listData)
+    const [listJSXState, setListsJSXState] = useState([]);
+   
+    const setListsJSX = () =>
     {
+        listsJSX = [];
+        if(listData)
+        {
         for(var i=0; i< listData.length; i++)
         {
             listsJSX.push(
                 <List key={listData[i].listName} data={listData[i]} reload={reload}></List>
             )
         }
+        setListsJSXState(listsJSX);
 
+        }
     }
+    
 
     const onNewListAdded = () =>
     {
@@ -64,7 +71,13 @@ const MyLists = () => {
     useEffect(() =>
     {
         FetchListsData();
+       
     }, [dataChanged]) //fetched data on inital load and every time new list is added
+
+    useEffect(() =>
+    {
+        setListsJSX();
+    },[listData])
     
     return (
         <div className="background">
@@ -77,7 +90,7 @@ const MyLists = () => {
                     Back To Home</button>
             </div>
             <div className="ListsContainer">
-                {listsJSX}
+                {listJSXState}
             </div>
             <div className="divider">
             </div>
