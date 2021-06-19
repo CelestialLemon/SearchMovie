@@ -1,16 +1,24 @@
 .banner
 {
-     display: flex;
+     
 }
 
-.banner .searchbar
+.banner .taskBar
+{
+    display: flex;
+    max-height: 100px;
+}
+
+.banner .taskBar .searchbar
 {
     margin-right: 20px;
     margin-left: auto;
     margin-top: 20px;
 }
 
-.banner .mylists
+
+
+.banner .taskBar .mylists
 {
     height: 40px;
     margin : 20px;
@@ -34,23 +42,28 @@
     color : black;
 }
 
-.banner .listsMenuContainer
-{
-    display: block;
-    padding : 20px;
-    max-width: 290px;
-    height: fit-content;
-    background-color: black;
-    border-radius: 10px;
 
+
+.banner .showInfo
+{
+    padding : 50px 50px 50px 50px;
 }
 
-.banner .listsMenuContainer .item
+.banner .showInfo .currently-watching
 {
-    margin-bottom: 10px;
-    width: 250px;
-    height: 50px;
+    font-size: 40px;
+    color : white;
+    mix-blend-mode: difference;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.banner .showInfo .title
+{
+    mix-blend-mode: difference;
+    font-size: 70px;
+    color : white;
+}
+
 
 .popularShowListContainer
 {

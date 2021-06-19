@@ -19,7 +19,10 @@ const MyLists = () => {
     {
         try
         {
-            const res = await axios.get("http://localhost:4000/lists/userlists", {headers : {"authorization" : "Bearer " + (localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken"))}})
+            const res = await axios.get("http://localhost:4000/lists/userlists", 
+            {
+                headers : {"authorization" : "Bearer " + (localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken"))}
+            })
             setListData(res.data);
         }catch(err)
         {

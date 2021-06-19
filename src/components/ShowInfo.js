@@ -73,7 +73,7 @@ const ShowInfo = () => {
             const res = await axios.post('http://localhost:4000/shows/showstatus', 
             {
                 "showId" : id.toString()},
-            {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}}
+            {headers : {'authorization' : 'Bearer ' + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))}}
             )
 
             console.log(res.data);
@@ -84,6 +84,12 @@ const ShowInfo = () => {
         {
             console.log(err);
         }
+    }
+
+    const onSeasonsCompletedChange = (seasonsCompleted, progress) => 
+    {
+        setShowSeasonsCompleted(seasonsCompleted);
+        setShowProgress(progress);
     }
 
     const [activeTab, setActiveTab] = useState('SeasonsTab');
@@ -112,7 +118,7 @@ const ShowInfo = () => {
         </div>
         
         <div>
-            {activeTab == "SeasonsTab" ? <SeasonTab id={id} data={data} seasonsCompleted={showSeasonsCompleted}></SeasonTab> : <></>}
+            {activeTab == "SeasonsTab" ? <SeasonTab id={id} data={data} seasonsCompleted={showSeasonsCompleted} onSeasonsCompletedChange={onSeasonsCompletedChange}></SeasonTab> : <></>}
             {activeTab == "CastTab" ? <CastTab id={id}></CastTab> : <></>}
             {activeTab == "ImagesTab" ? <ImagesTab id={id}></ImagesTab> : <></>}
             {activeTab == "RecommendedTab" ? <RecommendedTab id={id}></RecommendedTab> : <></>}

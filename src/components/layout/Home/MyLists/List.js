@@ -39,6 +39,32 @@ const List = ({data, reload}) => {
         }
     }
 
+    const [showsJSXState, setShowsJSXState] = useState(null);
+    let showsJSX = [];
+    const setShowsJSX = async () =>
+    {
+        showsJSX = [];
+           for(var i=0; i<data.shows.length; i++)
+            {
+                const index = i;
+                const showData = await FetchShowData(data.shows[i].showId);
+                showsJSX.push(
+                    <div key={showData.id} className="show">
+                         <h3 className="name">{String("0" + (i + 1)).slice(-2) + ". " +showData.name}</h3>
+                         <AiOutlineMinusCircle className="delete" onClick={(e) => onShowDelete(showData.id, index)}></AiOutlineMinusCircle>
+                    </div>
+                )
+            }
+
+            if(data.shows.length === 0)
+            {
+                showsJSX = (<h3>List empty</h3>)
+            }
+
+            setShowsJSXState(showsJSX);
+    }
+
+
     const onShowDelete = async (id, indexToDelete) =>
     {
         console.log("deleting show : " + id + " from listname " + data.listName);
@@ -49,15 +75,14 @@ const List = ({data, reload}) => {
                 'listName' : data.listName,
                 'showId' : id.toString()
             },
-            {headers : {'authorization' : 'Bearer ' + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}}
+            {headers : {'authorization' : 'Bearer ' + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))}}
             )
 
-            console.log(res.data);
-            console.log(showsJSXState);
-            const newList = showsJSXState.filter((show, index) => index !== indexToDelete);
-            
+           const newList = showsJSXState.filter((show, index) => index !== indexToDelete);
+            console.log(newList);
             setShowsJSXState(newList);
-            reload();
+            setShowsJSX();
+            
             
         }catch(err)
         {
@@ -100,35 +125,17 @@ const List = ({data, reload}) => {
 
 
 
-    let showsJSX = [];
-    const [showsJSXState, setShowsJSXState] = useState(null);
+   
     
-    const setShowsJSX = async () =>
-    {
-           for(var i=0; i<data.shows.length; i++)
-            {
-                const index = i;
-                const showData = await FetchShowData(data.shows[i].showId);
-                showsJSX.push(
-                    <div key={showData.id} className="show">
-                         <h3 className="name">{String("0" + (i + 1)).slice(-2) + ". " +showData.name}</h3>
-                         <AiOutlineMinusCircle className="delete" onClick={(e) => onShowDelete(showData.id, index)}></AiOutlineMinusCircle>
-                    </div>
-                )
-            }
-
-            if(data.shows.length === 0)
-            {
-                showsJSX = (<h3>List empty</h3>)
-            }
-
-            setShowsJSXState(showsJSX);
-    }
-
     useEffect(() =>
     {
         setShowsJSX();
     }, [data]);
+
+    useEffect(() =>
+    {
+        reload();
+    }, [showsJSXState])
 
     const popover = (
         <Popover id="popover-basic">

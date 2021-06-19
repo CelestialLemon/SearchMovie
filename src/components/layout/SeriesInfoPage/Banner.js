@@ -20,6 +20,7 @@ const Banner = ({data, id, showStatus, showProgress}) => {
 
     let bannerCss;   //css for banner , written external instead of inline to make code look cleaner    
     const [st, setSt] = useState(showStatus);
+    const [showProgressState, setShowProgressState] = useState(showProgress);
 
     if(data)        //after data is fetched css is set to avoid error at data.backdrop
     {
@@ -42,7 +43,10 @@ const Banner = ({data, id, showStatus, showProgress}) => {
     {
         try
         {
-            const res = await axios.get('http://localhost:4000/lists/userlists', {headers : {'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')}});
+            const res = await axios.get('http://localhost:4000/lists/userlists', 
+            {
+                headers : 
+                    {'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))}});
             setListsData(res.data);
         }catch(err)
         {
@@ -186,7 +190,12 @@ const Banner = ({data, id, showStatus, showProgress}) => {
    useEffect(() =>
    {
        setSt(showStatus);
-   }, [showStatus])
+   }, [id, showStatus])
+
+   useEffect(() =>
+   {
+    setShowProgressState(showProgress)
+   }, [id, showProgress])
 
     return (
         <div>
@@ -207,7 +216,7 @@ const Banner = ({data, id, showStatus, showProgress}) => {
                 </div>
                 
                 {st != '' && st != 'Watch Later' && st != 'Completed'? 
-                 <ProgressBar animated variant={ProgressBarVariant} now={showProgress}/>
+                 <ProgressBar animated variant={ProgressBarVariant} now={showProgressState}/>
                 : <></>}
 
                 {st == 'Completed'? 

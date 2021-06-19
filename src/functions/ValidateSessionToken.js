@@ -8,12 +8,17 @@ const ValidateSessionToken = async () =>
 
     try
     {
-        const res = await axios.post("http://localhost:4000/users/login", "" , {'headers': {'authorization' : 'Bearer ' + sessionStorage.getItem("accessToken")}});
-        if(res.data.msg === "logged in with token")
-        return true;
+        const res = await axios.post("http://localhost:4000/users/login", {} , {'headers': {'authorization' : 'Bearer ' + sessionStorage.getItem("accessToken")}});
+        console.log("validating session token result " + res.data.msg);
+        if(res.data.msg == "logged in with token")
+        {
+            console.log("Logged In with session token");
+            return true;
+        }
         else
         {
-            console.log("Invalid Token");
+            console.log("Invalid session Token");
+           
             return false;
         }
         

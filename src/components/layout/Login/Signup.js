@@ -7,8 +7,8 @@ const Signup = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [response, setResponse] = useState('');
-   
+    const [response, setResponse] = useState(null);
+    const [responseCSS, setResponseCSS] = useState({"color" : "white"});
 
     const onSubmitClick = async (e) =>
     {
@@ -17,6 +17,14 @@ const Signup = () => {
             const res = await axios.post("http://localhost:4000/users/signup", {"username" : username, "password" : password});
             //setDisplayResponse(true);
             setResponse(res.data.msg);
+            if(res.data.msg === "user already exists")
+            {
+                setResponseCSS({color : "red"})
+            }
+            else if(res.data.msg === "Signed Up successfully")
+            {
+                setResponseCSS({color : "green"})
+            }
         }catch(err)
         {
             console.log(err);
@@ -45,11 +53,16 @@ const Signup = () => {
                 <div className="formElement">
                     <a className="forgotpassword" href="/login">Login instead?</a>
                 </div>
-                <div className="formElement">
-                    <div className="responseContainer">
-                    <h3 className="response">{response}</h3>
+                {
+                    response ? 
+                    <div className="formElement">
+                    <div style={responseCSS} className="responseContainer">
+                    <h3  className="response">{response}</h3>
                     </div>
                 </div>
+                :
+                <></>
+                }
                 
           </div>
        </div>  

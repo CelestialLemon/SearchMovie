@@ -13,7 +13,7 @@ export const onStartWatchingClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
         //delete show from watch later
@@ -24,7 +24,7 @@ export const onStartWatchingClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
         console.log(res.data);
@@ -45,7 +45,7 @@ export const onPutOnPauseClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -58,7 +58,7 @@ export const onPutOnPauseClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -70,7 +70,7 @@ export const onPutOnPauseClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
     }catch(err)
@@ -90,7 +90,7 @@ export const onContinueWatchingClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -103,7 +103,7 @@ export const onContinueWatchingClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -115,7 +115,7 @@ export const onContinueWatchingClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
     }catch(err)
@@ -135,7 +135,7 @@ export const onAddToWatchLaterClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -158,7 +158,7 @@ export const onMarkAsCompleteClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -171,7 +171,7 @@ export const onMarkAsCompleteClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
 
@@ -183,7 +183,7 @@ export const onMarkAsCompleteClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         });
     }catch(err)
@@ -203,7 +203,7 @@ export const onDropClick = async (id) =>
         },
         {
             headers : {
-                'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
             }
         })
     }catch(err)

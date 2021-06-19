@@ -6,7 +6,7 @@ import analyze from 'rgbaster'
 
 import { MdDone } from 'react-icons/md'
 
-const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted}) => {
+const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted, onSeasonsCompletedChange}) => {
     
     const [seasonData, setSeasonData] = useState(null);
     const [backgroundColor, setBackgroundColor] = useState(null);
@@ -102,7 +102,7 @@ const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted}
             },
             {
                 headers : {
-                    'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                    'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
                 }
             });
 
@@ -122,11 +122,13 @@ const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted}
             },
             {
                 headers : {
-                    'authorization' : "Bearer " + localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
+                    'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))
                 }
             });
 
+            seasonsCompleted = seasonNumber;
             console.log(res2.data);
+            onSeasonsCompletedChange(seasonNumber, seasonNumber * 100 / totalNumOfSeasons);
         }catch(err)
         {
             console.log(err);
@@ -145,7 +147,6 @@ const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted}
             color : foregroundColor
         })
     }, [backgroundColor, foregroundColor])
- 
     
 
     if(seasonData)
