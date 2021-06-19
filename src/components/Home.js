@@ -54,7 +54,7 @@ const Home = () => {
     {
         try
         {
-            const res = await axios.get('http://localhost:4000/lists/getcurrentlywatchingshows',
+            const res = await axios.get('https://api-search-a-movie-22.herokuapp.com/lists/getcurrentlywatchingshows',
             {
                 headers : {
                     'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))

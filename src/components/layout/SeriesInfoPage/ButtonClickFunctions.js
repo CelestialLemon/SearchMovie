@@ -5,7 +5,7 @@ export const onStartWatchingClick = async (id) =>
 {
     try
     {
-        const res = await axios.post('http://localhost:4000/lists/addshowtolist',
+        const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist',
         {
             "listName" : "Currently Watching",
             "showId" : id.toString(),
@@ -17,7 +17,7 @@ export const onStartWatchingClick = async (id) =>
             }
         });
         //delete show from watch later
-        const res2 = await axios.post('http://localhost:4000/lists/deleteshowfromlist',
+        const res2 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist',
         {
             "listName" : "Watch Later",
             "showId" : id.toString(),
@@ -38,7 +38,7 @@ export const onPutOnPauseClick = async (id) =>
 {
     try
     { //get data of the show from currently watching list
-        const res = await axios.post('http://localhost:4000/shows/getshowfromlist',
+        const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/getshowfromlist',
         {
             "listName" : "Currently Watching",
             "showId" : id.toString()
@@ -50,7 +50,7 @@ export const onPutOnPauseClick = async (id) =>
         });
 
         //add the show to on pause list
-        const res2 = await axios.post('http://localhost:4000/lists/addshowtolist',
+        const res2 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist',
         {
             "listName" : "On Pause",
             "showId" : id.toString(),
@@ -63,7 +63,7 @@ export const onPutOnPauseClick = async (id) =>
         });
 
         //delete the show from currently watching
-        const res3 = await axios.post('http://localhost:4000/lists/deleteshowfromlist',
+        const res3 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist',
         {
             "listName" : "Currently Watching",
             "showId" : id.toString(),
@@ -83,7 +83,7 @@ export const onContinueWatchingClick = async (id) =>
 {
     try
     { //get data of the show from on pause list
-        const res = await axios.post('http://localhost:4000/shows/getshowfromlist',
+        const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/getshowfromlist',
         {
             "listName" : "On Pause",
             "showId" : id.toString()
@@ -95,7 +95,7 @@ export const onContinueWatchingClick = async (id) =>
         });
 
         //add the show tocurrently watching
-        const res2 = await axios.post('http://localhost:4000/lists/addshowtolist',
+        const res2 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist',
         {
             "listName" : "Currently Watching",
             "showId" : id.toString(),
@@ -108,7 +108,7 @@ export const onContinueWatchingClick = async (id) =>
         });
 
         //delete the show from currently watching
-        const res3 = await axios.post('http://localhost:4000/lists/deleteshowfromlist',
+        const res3 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist',
         {
             "listName" : "On Pause",
             "showId" : id.toString(),
@@ -128,7 +128,7 @@ export const onAddToWatchLaterClick = async (id) =>
 {
     try
     {
-        const res = await axios.post('http://localhost:4000/lists/addshowtolist', 
+        const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist', 
         {
             "listName" : "Watch Later",
             "showId" : id.toString()
@@ -151,7 +151,7 @@ export const onMarkAsCompleteClick = async (id) =>
     try
     {
         //get data of the show from currently watching list
-        const res = await axios.post('http://localhost:4000/shows/getshowfromlist',
+        const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/getshowfromlist',
         {
             "listName" : "Currently Watching",
             "showId" : id.toString()
@@ -163,7 +163,7 @@ export const onMarkAsCompleteClick = async (id) =>
         });
 
         //add the show to on completed list
-        const res2 = await axios.post('http://localhost:4000/lists/addshowtolist',
+        const res2 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist',
         {
             "listName" : "Completed",
             "showId" : id.toString(),
@@ -176,7 +176,7 @@ export const onMarkAsCompleteClick = async (id) =>
         });
 
         //delete the show from currently watching
-        const res3 = await axios.post('http://localhost:4000/lists/deleteshowfromlist',
+        const res3 = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist',
         {
             "listName" : "Currently Watching",
             "showId" : id.toString(),
@@ -196,7 +196,7 @@ export const onDropClick = async (id) =>
 {
     try
     {
-        const res = await axios.post('http://localhost:4000/lists/deleteshowfromlist',
+        const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/lists/deleteshowfromlist',
         {
             "listName" : "On Pause",
             "showId" : id.toString()

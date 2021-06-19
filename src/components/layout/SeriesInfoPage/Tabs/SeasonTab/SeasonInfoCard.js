@@ -96,7 +96,7 @@ const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted,
     {
         try
         {
-            const res = await axios.post('http://localhost:4000/shows/showstatus',
+            const res = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/showstatus',
             {
                 "showId" : id.toString()
             },
@@ -113,7 +113,7 @@ const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted,
                 "progress" : seasonNumber * 100 / totalNumOfSeasons
             })
             
-            const res2 = await axios.post('http://localhost:4000/shows/updateprogress',
+            const res2 = await axios.post('https://api-search-a-movie-22.herokuapp.com/shows/updateprogress',
             {
                 "listName" : res.data.listName,
                 "showId" : id.toString(),

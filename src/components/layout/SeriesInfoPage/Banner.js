@@ -43,7 +43,7 @@ const Banner = ({data, id, showStatus, showProgress}) => {
     {
         try
         {
-            const res = await axios.get('http://localhost:4000/lists/userlists', 
+            const res = await axios.get('https://api-search-a-movie-22.herokuapp.com/lists/userlists', 
             {
                 headers : 
                     {'authorization' : "Bearer " + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))}});
@@ -62,7 +62,7 @@ const Banner = ({data, id, showStatus, showProgress}) => {
             {
                 if(customLists[i].checked === true)
                 {
-                    const res = await axios.post("http://localhost:4000/lists/addshowtolist", {
+                    const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/lists/addshowtolist", {
                     "listName" : customLists[i].listName,
                     "showId" : id,
                     "progress" : 0

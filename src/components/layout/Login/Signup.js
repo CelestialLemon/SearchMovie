@@ -14,7 +14,7 @@ const Signup = () => {
     {
         try
         {
-            const res = await axios.post("http://localhost:4000/users/signup", {"username" : username, "password" : password});
+            const res = await axios.post("https://api-search-a-movie-22.herokuapp.com/users/signup", {"username" : username, "password" : password});
             //setDisplayResponse(true);
             setResponse(res.data.msg);
             if(res.data.msg === "user already exists")

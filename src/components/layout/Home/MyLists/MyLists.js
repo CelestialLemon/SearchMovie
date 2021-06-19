@@ -19,7 +19,7 @@ const MyLists = () => {
     {
         try
         {
-            const res = await axios.get("http://localhost:4000/lists/userlists", 
+            const res = await axios.get("https://api-search-a-movie-22.herokuapp.com/lists/userlists", 
             {
                 headers : {"authorization" : "Bearer " + (localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken"))}
             })
