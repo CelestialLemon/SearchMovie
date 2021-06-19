@@ -154,8 +154,33 @@ const SeasonInfoCard = ({ id, seasonNumber, totalNumOfSeasons, seasonsCompleted,
         const arr = seasonData.air_date.split('-');
         const date = arr[2];
         const year = arr[0];
-        const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
-        const month = formatter.format(new Date(0, arr[1] - 1, 0));
+        
+        let month = '';
+        if(arr[1] == 1)
+            month = 'Jan'
+        else if(arr[1] == 2)
+            month = 'Feb'
+        else if(arr[1] == 3)
+            month = 'Mar'
+        else if(arr[1] == 4)
+            month = 'Apr'
+        else if(arr[1] == 5)
+            month = 'May'
+        else if(arr[1] == 6)
+            month = 'Jun'
+        else if(arr[1] == 7)
+            month = 'Jul'
+        else if(arr[1] == 8)
+            month = 'Aug'
+        else if(arr[1] == 9)
+            month = 'Sep'
+        else if(arr[1] == 10)
+            month = 'Oct'
+        else if(arr[1] == 11)
+            month = 'Nov'
+        else if(arr[1] == 12)
+            month = 'Dec'
+        
 
         const airDate = date + " " + month + " " + year;
 ;
