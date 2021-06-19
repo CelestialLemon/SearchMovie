@@ -78,9 +78,9 @@ const List = ({data, reload}) => {
             {headers : {'authorization' : 'Bearer ' + (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken'))}}
             )
 
-           const newList = showsJSXState.filter((show, index) => index !== indexToDelete);
-            console.log(newList);
-            setShowsJSXState(newList);
+        //    const newList = showsJSXState.filter((show, index) => index !== indexToDelete);
+        //     console.log(newList);
+        //     setShowsJSXState(newList);
             setShowsJSX();
             reload();
             
