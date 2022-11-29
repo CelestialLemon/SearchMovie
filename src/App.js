@@ -12,6 +12,7 @@ function App() {
   return (
     <div> 
      <Router>
+      
         <Switch>
           <Route exact path="/temp" component={Temp}></Route>
           <Route exact path="/login" component={Login}></Route>
